@@ -1,0 +1,186 @@
+﻿@model IList<Logicore.Core.ServerModels.MessageQueryDto>
+@{
+    Layout = "~/Views/Shared/_Index_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <!--顶部导航开始-->
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">LogicoreManager</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class=""><a href="#" onclick="nthTabs.setActTab('IndexPage')">首页 <span
+                                    class="sr-only">(current)</span></a></li>
+                        <li><a href="#">Link</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">个人信息</a></li>
+                                <li><a href="#">修改密码</a></li>
+                                <li><a href="#">登陆记录</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="logout">退出</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="navbar-form navbar-left">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <!--站内信开始-->
+                        <li class="dropdown">
+                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" aria-expanded="false">
+                                <i class="fa fa-envelope"></i> <span
+                                    class="label label-warning">@ViewBag.MyUnReadMessageNumber</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-messages">
+                                @if (Model != null && Model.Any())
+                                {
+                                    @foreach (var message in Model)
+                                    {
+                                        <li>
+                                            <div class="dropdown-messages-box">
+                                                <div class="media-body">
+                                                    <strong><i class="glyphicon glyphicon-envelope"></i><a href="javascript:;"
+                                                    onclick="readMessage('@message.Id')">@message.Title</a></strong><br>
+                                                    <small class="text-muted">@message.CreateDateTime</small>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="divider"></li>
+                                    }
+                                }
+                                else
+                                {
+                                    <li>
+                                        <div class="dropdown-messages-box">
+                                            <div class="media-body">
+                                                没有未读的信息
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                }
+                                @*<li>
+                                    <div class="text-center link-block">
+                                    <a href="#">
+                                    <i class="fa fa-envelope"></i> <strong>更多</strong>
+                                    </a>
+                                    </div>
+                                    </li>*@
+                            </ul>
+                        </li>
+                        <!--站点信结束-->
+                        <!--用户信息开始-->
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-haspopup="true" aria-expanded="false">@User.Identity.Name <span
+                                    class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#" onclick="openInfoModal()">个人信息</a>
+                                </li>
+                                <li>
+                                    <a href="#" onclick="openEditPasswordModal()">修改密码</a>
+                                </li>
+                                <li><a href="#">登陆记录</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href='@Url.Action("Logout")'>退出</a></li>
+                            </ul>
+                        </li>
+                        <!--用户信息结束-->
+
+                        <li class="hidden-xs">
+                            <a href='@Url.Action("Logout")'><i class="fa fa fa-sign-out"></i> 退出</a>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+        <!--顶部导航结束-->
+    </div>
+
+    <div id="leftContent" class="row">
+        <!--左侧导航条开始-->
+        <div class="col-md-2">
+            <partial name="~/Views/Shared/Menu.cshtml" />
+        </div>
+        <!--左侧导航条结束-->
+        <!--右侧内容开始-->
+        <div class="col-md-10">
+            <div class="nth-tabs" id="editor-tabs"></div>
+            <!--使用时只需此标签，class固定,id自定义
+            <div class="row" style="margin-top:20px;">
+                <div class="col-md-10" style="line-height:50px;">
+                    <button type="button" class="btn btn-primary" onClick="nthTabs.delTab('f')">关闭潘金莲</button>
+                    <button type="button" class="btn btn-primary"
+                        onClick="nthTabs.addTab({id:'bgj',title:'白骨精',content:'老白'})">添加白骨精</button>
+                    <button type="button" class="btn btn-primary" onClick="nthTabs.setActTab('b')">切换到武松</button>
+                    <button type="button" class="btn btn-primary" onClick="nthTabs.locationTab()">定位到当前选项卡</button>
+                    <button type="button" class="btn btn-primary" onClick="nthTabs.delOtherTab()">关闭其他</button>
+                    <button type="button" class="btn btn-primary" onClick="nthTabs.delAllTab()">关闭所有</button>
+                    <button type="button" class="btn btn-primary" onClick="$('.roll-nav-left').click()">左滑动</button>
+                    <button type="button" class="btn btn-primary" onClick="$('.roll-nav-right').click()">右滑动</button>
+                    <button type="button" class="btn btn-primary"
+                        onClick="alert(nthTabs.getMarginStep())">获取左右滑动步值</button>
+                    <button type="button" class="btn btn-primary"
+                        onClick="alert(nthTabs.getActiveId())">获取当前选项卡ID</button>
+                    <button type="button" class="btn btn-primary"
+                        onClick="alert(nthTabs.getAllTabWidth())">获取所有选项卡宽度</button>
+                    <button type="button" class="btn btn-primary"
+                        onClick="console.log(nthTabs.getTabList());alert(nthTabs.getTabList())">获取所有选项卡</button>
+                    <button type="button" class="btn btn-primary" onclick='isExistTabWidth("b")'>查找B选择卡</button>
+                </div>
+            </div>-->
+        </div>
+        <!--右侧内容结束-->
+    </div>
+
+    <!--页脚信息开始-->
+    <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+        <p>适用浏览器：360、FireFox、Chrome、Safari、Opera、傲游、搜狗、世界之窗. 不支持IE8及以下浏览器。</p>
+        <p>来源：<a href="#" target="_blank">三个重点</a></p>
+    </div>
+    <!--页脚信息开始-->
+</div>
+
+<!--模态框-->
+
+<!--模态框-个人信息开始-->
+<div class="modal fade" id="editInfoModal" tabindex="-1" role="dialog" aria-labelledby="editInfoModalLabel"
+    aria-hidden="true">
+</div>
+<!--模态框-个人信息结束-->
+
+<!--模态框-修改密码开始-->
+<div class="modal fade" id="editPasswordModal" tabindex="-2" role="dialog" aria-labelledby="editPasswordModalLabel"
+    aria-hidden="true">
+</div>
+<!--模态框-修改密码结束-->
+
+<!--模态框--登陆记录开始-->
+<div class="modal fade" id="loginLogModal" tabindex="-3" role="dialog" aria-labelledby="loginLogLabel"
+    data-backdrop="false" aria-hidden="true">
+</div>
+<!--模态框--登陆记录结束-->
+
+<!--模态框-->

@@ -1,0 +1,45 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "provider": "unpkg",
+      "library": "bootstrap@5.0.1",
+      "destination": "wwwroot/lib/bootstrap/"
+    },
+    {
+      "library": "bootstrap-table@1.18.3",
+      "destination": "wwwroot/lib/bootstrap-table/"
+    },
+    {
+      "library": "bootstrap3-dialog@1.35.4",
+      "destination": "wwwroot/lib/bootstrap3-dialog/"
+    },
+    {
+      "provider": "unpkg",
+      "library": "jquery-validation-unobtrusive@3.2.12",
+      "destination": "wwwroot/lib/jquery-validation-unobtrusive/"
+    },
+    {
+      "library": "toastr.js@2.1.4",
+      "destination": "wwwroot/lib/toastr/"
+    },
+    {
+      "library": "bootstrap-datetimepicker@4.17.47",
+      "destination": "wwwroot/lib/bootstrap-datetimepicker/"
+    },
+    {
+      "provider": "unpkg",
+      "library": "jquery-validation@1.19.3",
+      "destination": "wwwroot/lib/jquery-validation/"
+    },
+    {
+      "library": "jquery@3.6.0",
+      "destination": "wwwroot/lib/jquery/"
+    },
+    {
+      "library": "jquery.scrollbar@0.2.11",
+      "destination": "wwwroot/lib/jquery/scrollbar/"
+    }
+  ]
+}

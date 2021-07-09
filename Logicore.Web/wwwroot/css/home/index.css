@@ -1,0 +1,24 @@
+.right-nav-list.open ul.dropdown-menu {
+  margin: 2px -124px 0;
+}
+
+.nth-tabs .tab-content {
+  max-height: 700px;
+  height: calc(70vh);
+}
+
+.tab-content > .active {
+  overflow: auto;
+  height: calc(70vh);
+}
+
+.filterinput {
+  background-color: #e6e6e6;
+  border-radius: 15px;
+  width: 90%;
+  height: 30px;
+  border: thin solid #fff;
+  text-indent: 0.5em;
+  font-weight: bold;
+  color: black;
+}

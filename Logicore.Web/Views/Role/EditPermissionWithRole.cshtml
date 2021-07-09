@@ -1,0 +1,163 @@
+@using Logicore.Core.Enities.ServiceModel
+@using Newtonsoft.Json
+@model List<Logicore.Core.ViewModel.ZtreeViewModel>
+@{
+    Layout = null;
+    var ZtreeModel = Html.Raw(Json.Serialize(ViewBag.ZtreeModel));
+    string RoleId = ViewBag.roleId;
+}
+
+<script src="~/lib/zTree_v3/js/jquery.ztree.core.js"></script>
+<script src="~/lib/zTree_v3/js/jquery.ztree.excheck.js"></script>
+<link rel="stylesheet" href="~/lib/zTree_v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button data-dismiss="modal" class="close">&times;</button>
+            <h3 class="modal-title">配置限权</h3>
+        </div>
+        <div class="modal-body">
+            <form id="editpermissionform">
+                <input id="roleId" value=@RoleId type="hidden">
+                <div class="zTreeDemoBackground">
+                    <ul id="treeDemo" class="ztree"></ul>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-sm" data-dismiss="modal">关闭</button>
+            <button id="submit" class="btn btn-sm btn-success" type="submit">提交</button>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    //ztree设置
+    var setting = {
+        check: {
+            enable: true,
+            chkboxType: { "Y": "ps", "N": "ps" }
+        },
+        data: {
+            simpleData: {
+                enable: true,
+                idKey: "id",
+                pIdKey: "pid",
+                rootPId: 0
+            }
+        },
+        callback: {
+            onCheck: onCheckNode //回调，获取选中节点
+        }
+    };
+
+    //ztree数据
+    zNodes = @ZtreeModel;
+
+    //ztree初始化
+    $(document).ready(function () {
+        $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+    });
+
+    //回调，获取选中节点
+    var ids = [];
+    function onCheckNode() {
+        var treenode = $.fn.zTree.getZTreeObj("treeDemo");
+        var chkNodeArr = treenode.getCheckedNodes(true); //true选中节点，flase未先中节点，默认true
+        ids = [];
+        chkNodeArr.forEach(element => {
+            ids.push(element.id);
+        });
+        console.log(ids);
+    };
+
+    //查询按钮
+    $("#submit").click(function () {
+        if (ids.length <= 0) {
+            alert("没有要修改的数据");
+            return;
+        }
+        var url = "/Role/EditPermissionWithRole";
+        var roleId = $("#roleId").val();
+        BootstrapDialog.confirm({
+            title: '确认',
+            message: '确认是要更改此角色限权',
+            type: BootstrapDialog.TYPE_SUCCESS, // <-- Default value is
+            // BootstrapDialog.TYPE_PRIMARY
+            closable: true, // <-- Default value is false，点击对话框以外的页面内容可关闭
+            draggable: true, // <-- Default value is false，可拖拽
+            btnCancelLabel: '取消', // <-- Default value is 'Cancel',
+            btnOKLabel: '确定', // <-- Default value is 'OK',
+            btnOKClass: 'btn-warning', // <-- If you didn't specify it, dialog type
+            size: BootstrapDialog.SIZE_SMALL,
+            // 对话框关闭的时候执行方法
+            //onhide: funcclose,
+            callback: function (result) {
+                if (result) {
+                    console.log(url);
+                    $.ajax({
+                        contentType: "application/x-www-form-urlencoded",
+                        url: url,
+                        data: { roleId: roleId, ids: ids },
+                        type: 'post',
+                        success: function (data, status) {
+                            if (data.status == true) {
+                                BootstrapDialog.show({
+                                    type: BootstrapDialog.TYPE_SUCCESS,  //BootstrapDialog.TYPE_DANGER, BootstrapDialog.TYPE_WARNING
+                                    title: '成功 ',
+                                    message: "操作成功",
+                                    size: BootstrapDialog.SIZE_SMALL,
+                                    buttons: [{
+                                        label: '确定',
+                                        action: function (dialogItself) {
+                                            dialogItself.close();
+                                        }
+                                    }],
+                                    // 指定时间内可自动关闭
+                                    onshown: function (dialogRef) {
+                                        setTimeout(function () {
+                                            dialogRef.close();
+                                        }, 2000);
+                                    },
+                                    // 对话框关闭时带入callback方法
+                                    //onhide: function () { }
+                                });
+                                $('#addModal').modal('hide');
+                                $('#editModal').modal('hide');
+                                $('#editPermission').modal('hide');
+                            }
+                            else {
+                                BootstrapDialog.show({
+                                    type: BootstrapDialog.TYPE_WARNING,  //BootstrapDialog.TYPE_DANGER, BootstrapDialog.TYPE_WARNING
+                                    title: '失败 ',
+                                    message: data.message,
+                                    size: BootstrapDialog.SIZE_SMALL,
+                                    buttons: [{
+                                        label: '确定',
+                                        action: function (dialogItself) {
+                                            dialogItself.close();
+                                        }
+                                    }],
+                                    // 指定时间内可自动关闭
+                                    onshown: function (dialogRef) {
+                                        setTimeout(function () {
+                                            dialogRef.close();
+                                        }, 2000);
+                                    },
+                                    // 对话框关闭时带入callback方法
+                                    //onhide: function () { }
+                                });
+                            }
+                        },
+                        error: function () {
+                            toastr.error('执行添加操作失败');
+                        },
+                        complete: function () {
+                        }
+                    });
+                }
+            }
+        });
+    });
+</script>
