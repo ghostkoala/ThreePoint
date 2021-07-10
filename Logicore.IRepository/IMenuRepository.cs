@@ -33,6 +33,7 @@ namespace Logicore.IRepository
         /// </summary>
         /// <param name="whereLambda">条件过滤</param>
         /// <param name="orderByLambda">排序过滤</param>
+        /// <param name="filter">基础过滤</param>
         /// <returns></returns>
         Task<PageResult<MenuEntity>> GetAsync(Expression<Func<MenuEntity, bool>> whereLambda, Expression<Func<MenuEntity, int>> orderByLambda, BaseFilter filter);
 

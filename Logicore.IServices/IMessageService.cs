@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Logicore.Core.Enities.ServiceModel;
+using Logicore.Core.Filters;
 using Logicore.Core.ServerModels;
 using Logicore.Core.ViewModel;
 
@@ -51,5 +53,12 @@ namespace Logicore.IServices
         /// <param name="id">id</param>
         /// <returns></returns>
         Task<MessageDto> FindAsync(string id);
+
+        /// <summary>
+        /// 站内信查找-表格
+        /// </summary>
+        /// <param name="filter">过滤</param>
+        /// <returns></returns>
+        Task<PageResult<MessageQueryViewModel>> GetMessageForTableAsync(MessageFilter filter);
     }
 }

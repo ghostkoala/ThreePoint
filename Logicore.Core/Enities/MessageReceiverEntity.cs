@@ -20,7 +20,7 @@ namespace Logicore.Core.Enities
         /// <summary>
         /// 是否已读
         /// </summary>
-        public bool IsReaded { get; set; }
+        public bool IsReaded { get; set; } = false;
 
         /// <summary>
         /// 查看时间

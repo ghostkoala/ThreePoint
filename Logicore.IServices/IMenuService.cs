@@ -83,7 +83,7 @@ namespace Logicore.IServices
         Task<bool> ReInitMenuesAsync(List<MenuDto> list);
 
         /// <summary>
-        /// 搜索菜单
+        /// 搜索菜单-表格
         /// </summary>
         /// <param name="filters"></param>
         /// <returns></returns>

@@ -50,7 +50,7 @@ namespace Logicore.Web.Controllers
         /// 部门管理首页
         /// </summary>
         /// <returns></returns>
-        [Menu(Id = Menu.DepartmentPageId, ParentId = Menu.SystemId, Name = "部门管理", Order = "0")]
+        [Menu(Id = Menu.DepartmentPageId, ParentId = Menu.SystemId, Name = "部门管理", Order = "0", Icon = "glyphicon glyphicon-list-alt")]
         public IActionResult Index()
         {
             return View();

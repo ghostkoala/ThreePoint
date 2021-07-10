@@ -1,8 +1,13 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Logicore.Core.Enities;
+using Logicore.Core.Enities.ServiceModel;
 using Logicore.Core.Exceptions;
 using Logicore.Core.Extensions;
+using Logicore.Core.Filters;
 using Logicore.Core.ServerModels;
 using Logicore.Core.ViewModel;
 using Logicore.IRepository;
@@ -49,6 +54,36 @@ namespace Logicore.Services
                 dto.ReceiverIds = entity.MessageReceivers.Select(x => x.Id).ToList();
             }
             return dto;
+        }
+
+        public async Task<PageResult<MessageQueryViewModel>> GetMessageForTableAsync(MessageFilter filter)
+        {
+            Expression<Func<MessageEntity, bool>> exp = x => x.IsDeleted == false;
+            var list = new PageResult<MessageEntity>();
+            if (filter.SearchUserId.IsNotBlank())
+            {
+                list = await _messageRepository.FindUserAsync(filter.SearchUserId, filter.SearchTitle, filter);
+            }
+            else
+            {
+                if (filter.SearchTitle.IsNotBlank()) exp = exp.And(x => x.Title.Contains(filter.SearchTitle));
+                Expression<Func<MessageEntity, DateTime>> orderExp = x => x.CreateDateTime;
+                list = await _messageRepository.GetAsync(exp, orderExp, filter);
+            }
+            var result = new PageResult<MessageQueryViewModel>();
+            result.records = list.records;
+            foreach (var item in list.rows)
+            {
+                result.rows.Add(new MessageQueryViewModel()
+                {
+                    Id = item.Id,
+                    Title = item.Title,
+                    Contents = item.Contents,
+                    CreateDateTime = item.CreateDateTime,
+                    ReadedNumber = item.ReadedNumber,
+                });
+            }
+            return result;
         }
 
         public async Task<int> GetMyMessageCountAsync(string userId)

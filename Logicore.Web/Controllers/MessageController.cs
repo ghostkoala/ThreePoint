@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using Logicore.Core.Enities.ServiceModel;
 using Logicore.Web.Extensions;
 using Logicore.Core.Extensions;
+using Logicore.Web.Filters;
+using Logicore.Core.Filters;
 
 namespace Logicore.Web.Controllers
 {
@@ -30,7 +32,7 @@ namespace Logicore.Web.Controllers
         /// 首页
         /// </summary>
         /// <returns></returns>
-        [Menu(Id = Menu.MessagePageId, ParentId = Menu.SystemId, Name = "站内信管理", Order = "0")]
+        [Menu(Id = Menu.MessagePageId, ParentId = Menu.SystemId, Name = "站内信管理", Order = "0", Icon = "glyphicon glyphicon-envelope")]
         [HttpGet]
         public IActionResult Index()
         {
@@ -123,6 +125,14 @@ namespace Logicore.Web.Controllers
                 result.Status = await _messageService.DeleteAsync(ids);
             }
             return Json(result);
+        }
+
+        [ParentPermission(null, "Admin", "Index")]
+        public async Task<JsonResult> GetMessageForTable(MessageFilter filter)
+        {
+            var rows = await _messageService.GetMessageForTableAsync(filter);
+            if (rows == null) return null;
+            return Json(new { total = rows.records, rows = rows.rows });
         }
     }
 }

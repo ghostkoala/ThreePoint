@@ -137,7 +137,7 @@ namespace Logicore.Web.Controllers
         /// </summary>
         /// <param name="ids">Ids</param>
         /// <returns></returns>
-        [Menu(Id = Menu.AdminDeleteId, ParentId = Menu.AdminPageId, Name = "删除管理员", Order = "3")]
+        [Menu(Id = Menu.AdminDeleteId, ParentId = Menu.AdminPageId, Name = "删除管理员", Order = "3", Icon = "glyphicon glyphicon-user")]
         [HttpPost]
         public async Task<IActionResult> Delete(IEnumerable<string> ids)
         {

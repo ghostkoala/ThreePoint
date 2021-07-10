@@ -20,12 +20,12 @@ namespace Logicore.Core.Enities
         /// <summary>
         /// 已读人数
         /// </summary>
-        public int ReadedNumber { get; set; }
+        public int ReadedNumber { get; set; } = 0;
 
         /// <summary>
         /// 总接收人数
         /// </summary>
-        public int Total { get; set; }
+        public int Total { get; set; } = 0;
 
         /// <summary>
         /// 消息接收人

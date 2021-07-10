@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Logicore.Core.Enities;
+using Logicore.Core.Enities.ServiceModel;
 using Logicore.Core.Exceptions;
+using Logicore.Core.Filters;
 using Logicore.Core.ServerModels;
 using Logicore.Core.ViewModel;
 using Logicore.IRepository;
@@ -156,6 +159,36 @@ namespace Logicore.Repository
             using (var dbContext = _dbContextFactory.CreateDbContext(DbContextType.Read))
             {
                 return await dbContext.Messages.AsNoTracking().Include(x => x.MessageReceivers).FirstOrDefaultAsync(x => x.Id == id);
+            }
+        }
+
+        public async Task<PageResult<MessageEntity>> GetAsync(Expression<Func<MessageEntity, bool>> whereLambda, Expression<Func<MessageEntity, DateTime>> orderByLambda, BaseFilter filter)
+        {
+            using (var dbContext = _dbContextFactory.CreateDbContext(DbContextType.Read))
+            {
+                var result = new PageResult<MessageEntity>();
+                IOrderedQueryable<Logicore.Core.Enities.MessageEntity> messages;
+                if (filter.Order == "asc") messages = dbContext.Messages.Where(whereLambda).OrderBy(orderByLambda);
+                else messages = dbContext.Messages.Where(whereLambda).OrderByDescending(orderByLambda);
+                result.records = await messages.CountAsync();
+                if (filter.Limit < 10) filter.Limit = 10;
+                if (filter.Offset < 0) filter.Limit = 0;
+                result.rows = await messages.Skip(filter.Offset).Take(filter.Limit).ToListAsync();
+                return result;
+            }
+        }
+
+        public async Task<PageResult<MessageEntity>> FindUserAsync(string id, string title, BaseFilter filter)
+        {
+            using (var dbContext = _dbContextFactory.CreateDbContext(DbContextType.Read))
+            {
+                var receiver = dbContext.MessageReceivers.AsNoTracking().Include(x => x.Message).Where(x => x.UserId == id && x.Message.Title.Contains(title));
+                var result = new PageResult<MessageEntity>();
+                result.records = await receiver.CountAsync();
+                if (filter.Limit < 10) filter.Limit = 10;
+                if (filter.Offset < 0) filter.Limit = 0;
+                result.rows = await receiver.Skip(filter.Offset).Take(filter.Limit).Select(x => x.Message).ToListAsync();
+                return result;
             }
         }
     }

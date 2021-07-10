@@ -48,7 +48,7 @@ namespace Logicore.Web.Controllers
         /// 角色管理主页
         /// </summary>
         /// <returns></returns>
-        [Menu(Id = Menu.RolePageId, ParentId = Menu.SystemId, Name = "角色管理", Order = "0")]
+        [Menu(Id = Menu.RolePageId, ParentId = Menu.SystemId, Name = "角色管理", Order = "0", Icon = "glyphicon glyphicon-lock")]
         public IActionResult Index()
         {
             return View();

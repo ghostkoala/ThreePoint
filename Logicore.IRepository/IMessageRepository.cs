@@ -1,6 +1,10 @@
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Logicore.Core.Enities;
+using Logicore.Core.Enities.ServiceModel;
+using Logicore.Core.Filters;
 using Logicore.Core.ServerModels;
 using Logicore.Core.ViewModel;
 
@@ -52,5 +56,22 @@ namespace Logicore.IRepository
         /// <param name="id">id</param>
         /// <returns></returns>
         Task<MessageEntity> FindAsync(string id);
+
+        /// <summary>
+        /// 获取站内信
+        /// </summary>
+        /// <param name="whereLambda">条件过滤</param>
+        /// <param name="orderByLambda">排序过滤</param>
+        /// <param name="filter">基础过滤</param>
+        /// <returns></returns>
+        Task<PageResult<MessageEntity>> GetAsync(Expression<Func<MessageEntity, bool>> whereLambda, Expression<Func<MessageEntity, DateTime>> orderByLambda, BaseFilter filter);
+
+        /// <summary>
+        /// 查找用户站内信
+        /// </summary>
+        /// <param name="id">Id</param>
+        /// <param name="filter">基础过滤</param>
+        /// <returns></returns>
+        Task<PageResult<MessageEntity>> FindUserAsync(string id, string title, BaseFilter filter);
     }
 }
