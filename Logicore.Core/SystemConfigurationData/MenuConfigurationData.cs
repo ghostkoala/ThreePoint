@@ -152,6 +152,26 @@ namespace Logicore.Core.SystemConfigurationData
         /// </summary>
         public const string DepartmentDeleteId = "00043";
 
+        /// <summary>
+        /// 站内信管理页
+        /// </summary>
+        public const string MessagePageId = "00050";
+
+        /// <summary>
+        /// 站内信管理页
+        /// </summary>
+        public const string MessageSendId = "00051";
+
+        /// <summary>
+        /// 站内信管理页
+        /// </summary>
+        public const string MessageEditId = "00052";
+
+        /// <summary>
+        /// 站内信管理页
+        /// </summary>
+        public const string MessageDeleteId = "00053";
+
         #endregion
 
 
@@ -161,12 +181,12 @@ namespace Logicore.Core.SystemConfigurationData
         /// <summary>
         /// 任务模板首页页面Id
         /// </summary>
-        public const string TaskTemplatePageId = "00046";
+        public const string TaskTemplatePageId = "10000";
 
         /// <summary>
         /// 任务模板添加页面Id
         /// </summary>
-        public const string TaskTemplateAddId = "00047";
+        public const string TaskTemplateAddId = "10001";
 
         #endregion
 

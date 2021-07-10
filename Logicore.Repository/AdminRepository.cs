@@ -218,12 +218,18 @@ namespace Logicore.Repository
 
         public async Task<bool> CheckPermitAsync(string roleId, string url)
         {
-            var isHave = false;
             using (var dbContext = _dbContextFactory.CreateDbContext(DbContextType.Read))
             {
-                isHave = await dbContext.RoleMenus.Where(x => x.RoleId == roleId).AnyAsync(x => x.Menu.Url == url);
+                return await dbContext.RoleMenus.Where(x => x.RoleId == roleId).AnyAsync(x => x.Menu.Url == url);
             }
-            return isHave;
+        }
+
+        public async Task<bool> IsExist(string id)
+        {
+            using (var dbContext = _dbContextFactory.CreateDbContext(DbContextType.Read))
+            {
+                return await dbContext.Admins.Where(x => x.IsDeleted == false).AnyAsync(x => x.Id == id);
+            }
         }
     }
 }

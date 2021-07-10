@@ -1,11 +1,11 @@
 using System;
 
-namespace Logicore.Core.ServerModels
+namespace Logicore.Core.ViewModel
 {
     /// <summary>
     /// 站内日志数据
     /// </summary>
-    public class MessageDetailDto
+    public class MessageDetailViewModel
     {
         /// <summary>
         /// 用户Id

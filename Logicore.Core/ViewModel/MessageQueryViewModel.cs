@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 
-namespace Logicore.Core.ServerModels
+namespace Logicore.Core.ViewModel
 {
     /// <summary>
     /// 站内信息数据
     /// </summary>
-    public class MessageQueryDto
+    public class MessageQueryViewModel
     {
         public string Id { get; set; }
 
@@ -38,6 +38,6 @@ namespace Logicore.Core.ServerModels
         /// <summary>
         /// 详情
         /// </summary>
-        public IList<MessageDetailDto> Details { get; set; }
+        public IList<MessageDetailViewModel> Details { get; set; }
     }
 }

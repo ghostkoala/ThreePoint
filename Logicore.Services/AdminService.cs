@@ -126,6 +126,11 @@ namespace Logicore.Services
             return _adminRepository.GetCountAsync();
         }
 
+        public Task<bool> IsExist(string id)
+        {
+            return _adminRepository.IsExist(id);
+        }
+
         public async Task<ResultModel<AdminTableViewModel>> LoginAsync(LoginViewModel dto)
         {
             dto.Password = dto.Password.ToMd5();

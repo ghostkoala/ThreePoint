@@ -88,5 +88,12 @@ namespace Logicore.IServices
         /// <param name="url">url</param>
         /// <returns></returns>
         Task<bool> CheckPermitAsync(string roleId, string url);
+
+        /// <summary>
+        /// 查找用户是否存在
+        /// </summary>
+        /// <param name="id">Id</param>
+        /// <returns></returns>
+        Task<bool> IsExist(string id);
     }
 }
