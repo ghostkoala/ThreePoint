@@ -41,6 +41,7 @@ namespace Logicore.Core.ServerModels
         /// </summary>
         /// <value></value>
         [Display(Name = "发送选项")]
+        [Required(ErrorMessage = ModelStateValidMessage.Required)]
         public SendModel SendModel { get; set; }
 
         /// <summary>

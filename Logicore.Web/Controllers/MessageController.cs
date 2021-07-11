@@ -45,6 +45,7 @@ namespace Logicore.Web.Controllers
         /// <returns></returns>
         [Menu(Id = Menu.MessageSendId, ParentId = Menu.SystemId, Name = "站内信发送", Order = "1")]
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Send()
         {
             return View();
@@ -55,22 +56,15 @@ namespace Logicore.Web.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Send(MessageDto dto)
         {
             if (ModelState.IsValid)
             {
-                var result = new ResultModel<bool>();
-                result.Data = await _messageService.SendAsync(dto);
-                if (result.Data) result.Status = true;
-                return Json(result);
+                await _messageService.SendAsync(dto);
+
             }
-            else
-            {
-                //找到出错的字段以及出错信息
-                var modelErrors = this.ExpendErrors();
-                var result = new ResultModel<List<string>>(410, false, "输入的数据有误", modelErrors);
-                return Json(result);
-            }
+            return View();
         }
 
         /// <summary>

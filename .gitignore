@@ -245,3 +245,5 @@ Logicore.Web/obj/Debug/netcoreapp3.1/Logicore.Web.csprojAssemblyReference.cache
 Logicore.Web/obj/Debug/netcoreapp3.1/Razor/Views/Message/Edit.cshtml.g.cs
 Logicore.Web/obj/Debug/netcoreapp3.1/Razor/Views/Message/Index.cshtml.g.cs
 Logicore.Web/obj/Debug/netcoreapp3.1/Razor/Views/Message/Send.cshtml.g.cs
+.vs/Logicore/DesignTimeBuild/.dtbcache.v2
+.vs/Logicore/v16/.suo

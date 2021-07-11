@@ -1,23 +1,34 @@
-@model Logicore.Core.ServerModels.MessageDto;
-
-<div class="Contain">
-    <form class="form-horizontal" name="sendform" id="sendForm" asp-conroller="Message" asp-action="send" method="post">
-        @Html.HiddenFor(x=>x.Id)
-        <div class="form-group">
-            @Html.LabelFor(x=>x.Title, new { @class = "form-control", placeholder = "请输入标题" })
-            @Html.TextBoxFor(x=>x.Title)
-            @Html.ValidationMessageFor(x=>x.Title)
+@using Microsoft.AspNetCore.Mvc.Rendering
+@model Logicore.Core.ServerModels.MessageDto
+<div class="form-group"></div>
+@using (Html.BeginForm(FormMethod.Post, new { @class = "form-horizontal", name = "editform", id = "editform" }))
+{
+    @Html.HiddenFor(m => m.Id)
+    <div class="form-group">
+        @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })
+        <div class="col-sm-8">
+            @Html.TextBoxFor(m => m.Title, new { @class = "form-control", placeholder = "请输入标题" })
+            <span style="color: red;">@Html.ValidationMessageFor(m => m.Title)</span>
         </div>
-        <div class="form-group">
-            @Html.LabelFor(x=>x.Contents, new { @class = "form-control", placeholder = "请输入内容" })
-            @Html.TextBoxFor(x=>x.Title)
-            @Html.ValidationMessageFor(x=>x.Title)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Contents, new { @class = "col-md-2 control-label" })
+        <div class="col-sm-8">
+            @Html.TextAreaFor(m => m.Contents, new {@style="height:200px", @class = "form-control", placeholder = "请输入内容" })
+            <span style="color: red;">@Html.ValidationMessageFor(m => m.Contents)</span>
         </div>
-        <div class="form-group">
-            @Html.LabelFor(x=>x.SendModel, new { @class = "form-control", placeholder = "请输入标题" })
-            @Html.RadioButtonFor(x=>x.SendModel,0, new { @name = "SendModel", @class = "radio-inline",})
-            @Html.RadioButtonFor(x=>x.SendModel,1, new { @name = "SendModel", @class = "radio-inline",})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.SendModel, new { @class = "col-md-2 control-label" })
+        <label class="radio-inline">
+            &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="SendModel" id="inlineRadio1" value=0 checked>
+            所有人&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="radio" name="SendModel" id="inlineRadio2" value=1> 个人
+        </label>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">发送</button>
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-    </form>
-</div>
+    </div>
+}

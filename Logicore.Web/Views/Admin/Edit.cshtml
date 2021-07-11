@@ -1,8 +1,7 @@
 @using Microsoft.AspNetCore.Mvc.Rendering
 @model Logicore.Core.ServerModels.AdminDto
 @{
-    Layout = null;
-}
+    Layout = null;}
 
 <div class="modal-dialog">
     <div class="modal-content">
@@ -49,6 +48,7 @@
                             {
                                 <option value="@Model.DepartmentId" selected>@Model.DepartmentName</option>
                             }
+
                             else
                             {
                                 <option value="">请选择</option>
@@ -69,6 +69,7 @@
                             {
                                 <option value="@Model.RoleId" selected>@Model.RoleName</option>
                             }
+
                             else
                             {
                                 <option value="">请选择</option>
@@ -88,7 +89,6 @@
                         @Html.ValidationMessageFor(m => m.Enabled)
                     </div>
                 </div>
-
             }
         </div>
         <div class="modal-footer">
