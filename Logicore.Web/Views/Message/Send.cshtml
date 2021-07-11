@@ -1,0 +1,23 @@
+@model Logicore.Core.ServerModels.MessageDto;
+
+<div class="Contain">
+    <form class="form-horizontal" name="sendform" id="sendForm" asp-conroller="Message" asp-action="send" method="post">
+        @Html.HiddenFor(x=>x.Id)
+        <div class="form-group">
+            @Html.LabelFor(x=>x.Title, new { @class = "form-control", placeholder = "请输入标题" })
+            @Html.TextBoxFor(x=>x.Title)
+            @Html.ValidationMessageFor(x=>x.Title)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x=>x.Contents, new { @class = "form-control", placeholder = "请输入内容" })
+            @Html.TextBoxFor(x=>x.Title)
+            @Html.ValidationMessageFor(x=>x.Title)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x=>x.SendModel, new { @class = "form-control", placeholder = "请输入标题" })
+            @Html.RadioButtonFor(x=>x.SendModel,0, new { @name = "SendModel", @class = "radio-inline",})
+            @Html.RadioButtonFor(x=>x.SendModel,1, new { @name = "SendModel", @class = "radio-inline",})
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+</div>

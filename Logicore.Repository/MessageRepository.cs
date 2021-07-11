@@ -117,7 +117,7 @@ namespace Logicore.Repository
                 message.CreateBy(_httpContextAccessor.HttpContext.Session.GetString("Uid"));
                 message.Title = dto.Title;
                 message.Contents = dto.Contents;
-                if (dto.ToAll == true)
+                if (dto.SendModel == SendModel.Toall)
                 {
                     var Ids = await dbContext.Admins.Where(x => x.IsDeleted == false).Select(x => x.Id).ToListAsync();
                     if (Ids.Count() <= 0) return false;

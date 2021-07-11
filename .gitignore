@@ -236,3 +236,12 @@ Logicore.Web/obj/Debug/netcoreapp3.1/Razor/Views/Shared/FootPage.cshtml.g.cs
 Logicore.Web/obj/Debug/netcoreapp3.1/Razor/Views/Shared/Menu.cshtml.g.cs
 Logicore.Web/obj/Debug/netcoreapp3.1/staticwebassets/Logicore.Web.StaticWebAssets.Manifest.cache
 Logicore.Web/obj/Debug/netcoreapp3.1/staticwebassets/Logicore.Web.StaticWebAssets.xml
+Logicore.Core/obj/Debug/netstandard2.0/Logicore.Core.csprojAssemblyReference.cache
+Logicore.IServices/obj/Debug/netstandard2.0/Logicore.IServices.csprojAssemblyReference.cache
+Logicore.Repository/obj/Debug/netstandard2.0/Logicore.Repository.csprojAssemblyReference.cache
+Logicore.IRepository/obj/Debug/netstandard2.0/Logicore.IRepository.csprojAssemblyReference.cache
+Logicore.Services/obj/Debug/netstandard2.0/Logicore.Services.csprojAssemblyReference.cache
+Logicore.Web/obj/Debug/netcoreapp3.1/Logicore.Web.csprojAssemblyReference.cache
+Logicore.Web/obj/Debug/netcoreapp3.1/Razor/Views/Message/Edit.cshtml.g.cs
+Logicore.Web/obj/Debug/netcoreapp3.1/Razor/Views/Message/Index.cshtml.g.cs
+Logicore.Web/obj/Debug/netcoreapp3.1/Razor/Views/Message/Send.cshtml.g.cs
