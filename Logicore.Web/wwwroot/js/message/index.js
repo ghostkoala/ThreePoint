@@ -24,13 +24,11 @@ var TableInit = function () {
     var columns = [];
     columns.push({ checkbox: true });
     columns.push({ field: 'id', title: 'Id', align: 'center', valign: 'middle', width: 120 });
-    columns.push({ field: 'name', title: '菜单名', align: 'center', valign: 'middle', width: 120 });
-    columns.push({ field: 'url', title: 'Url', align: 'center', valign: 'middle', width: 120 });
-    columns.push({ field: 'order', title: '排序', align: 'center', valign: 'middle', width: 120 });
-    columns.push({ field: 'icon', title: '图标', align: 'center', valign: 'middle', width: 120 });
-    columns.push({ field: 'typename', title: '类型', align: 'center', valign: 'middle', width: 120 });
-    columns.push({ field: 'parentname', title: '父级菜单名', align: 'center', valign: 'middle', width: 120 });
-    columns.push({ field: 'enable', title: '是否启用', align: 'center', valign: 'middle', width: 120 });
+    columns.push({ field: 'title', title: '标题', align: 'center', valign: 'middle', width: 120 });
+    columns.push({ field: 'contents', title: '内容', align: 'center', valign: 'middle', width: 120 });
+    columns.push({ field: 'readednumber', title: '已读人数', align: 'center', valign: 'middle', width: 120 });
+    columns.push({ field: 'total', title: '总接收人数', align: 'center', valign: 'middle', width: 120 });
+    columns.push({ field: 'createdatetime', title: '创建时间', align: 'center', valign: 'middle', width: 120 });
     // columns.push({
     //     field: 'operate',
     //     title: '操作',
@@ -65,7 +63,7 @@ var TableInit = function () {
     var oTableInit = new Object();
     //初始化Table
     oTableInit.Init = function () {
-        $('#tb_menus').bootstrapTable({
+        $('#tb_messages').bootstrapTable({
             url: '/Message/GetMessageForTable',     //请求后台的URL（*）
             method: 'get',                      //请求方式（*）
             toolbar: '#toolbar',                //工具按钮用哪个容器
@@ -101,11 +99,8 @@ var TableInit = function () {
             offset: params.offset,  //页码
             Keywords: params.search,  //搜索的字符
             Order: "desc", //排序方式 desc / asc
-            ExcludeType: $("#ExcludeType").val(),
-            IncludeType: $("#IncludeType").val(),
-            IsEnable: $("#IsEnable").val() == 0 ? "" : $("#IsEnable").val() > 0 ? true : false,
-            SearchModuleId: $("#SearchModuleId").val(),
-            SearchMenuId: $("#SearchMenuId").val(),
+            SearchTitle: $("#SearchTitle").val(),
+            SearchUserId: $("#SearchUserId").val(),
         };
         return temp;
     };
@@ -117,29 +112,9 @@ var ButtonInit = function () {
     var oInit = new Object();
 
     oInit.Init = function () {
-        //添加按钮事件
-        $("#btn_send").click(function () {
-            return false;
-        });
-
-        //修改按钮事件
-        $("#btn_edit").click(function () {
-            var arrselections = $("#tb_menus").bootstrapTable('getSelections');
-            //console.log(arrselections[0].id);
-            if (arrselections.length > 1) {
-                toastr.warning('只能选择一行进行编辑');
-                return;
-            }
-            if (arrselections.length <= 0) {
-                toastr.warning('请选择要编辑的数据');
-                return;
-            }
-            return false;
-        });
-
         //删除按钮事件
         $("#btn_delete").click(function () {
-            var arrselections = $("#tb_menus").bootstrapTable('getSelections');
+            var arrselections = $("#tb_messages").bootstrapTable('getSelections');
             //console.log(arrselections);
             var ids = [];
             if (arrselections.length <= 0) {

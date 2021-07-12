@@ -23,7 +23,7 @@ namespace Logicore.Core.ViewModel
         /// <summary>
         /// 创建时间
         /// </summary>
-        public DateTime CreateDateTime { get; set; }
+        public string CreateDateTime { get; set; }
 
         /// <summary>
         /// 已读人数

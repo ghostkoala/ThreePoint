@@ -24,6 +24,7 @@ $(function () {
 
 function newTabs(obj) {
     //openModel 1、text/html 2、Iframe打开
+    //console.log(obj);
     //<a>标签数据连接
     url = obj.dataset.url;
     //<a>标签Index

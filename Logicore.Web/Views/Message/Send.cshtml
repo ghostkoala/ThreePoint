@@ -1,7 +1,7 @@
 @using Microsoft.AspNetCore.Mvc.Rendering
 @model Logicore.Core.ServerModels.MessageDto
 <div class="form-group"></div>
-@using (Html.BeginForm(FormMethod.Post, new { @class = "form-horizontal", name = "editform", id = "editform" }))
+@using (Html.BeginForm(FormMethod.Post, new { @onsubmit="return CheckValid()", @class = "form-horizontal", name = "editform", id = "editform" }))
 {
     @Html.HiddenFor(m => m.Id)
     <div class="form-group">
@@ -19,17 +19,17 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-3 control-label">发送给所有人</label>
-        <div class="col-sm-8">
+        <label class="col-sm-2 control-label">发送给所有人</label>
+        <div class="col-sm-10">
             <select id="IsToAll" name="IsToAll" class="form-control">
                 <option value="false">否</option>
                 <option value="true">是</option>
             </select>
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-sm-3 control-label" asp-for="UserIds"></label>
-        <div class="col-sm-8">
+    <div id="ReceiverDiv" class="form-group">
+        <label class="col-sm-2 control-label" asp-for="ReceiverIds"></label>
+        <div class="col-sm-10">
             <select id="ReceiverIds" name="ReceiverIds" class="form-control" multiple="multiple"></select>
             <span asp-validation-for="ReceiverIds"></span>
         </div>
@@ -41,3 +41,30 @@
         </div>
     </div>
 }
+
+<script>
+    $("select#IsToAll").change(function (obj) {
+        var hide=$(this).val();//获取点击当前option的value值
+        console.log(hide);
+        if(hide=="false"){
+            $("#ReceiverDiv").show();
+        }
+        else{
+            $("#ReceiverDiv").hide();
+        }
+    });
+
+    //表单验证
+    function CheckValid() {
+        var ok = true;
+        console.log($("select#IsToAll").val());
+        if($("select#IsToAll").val() == "false"){
+            console.log($("select#ReceiverIds").val());
+            if($("select#ReceiverIds").val().length <= 0){
+                alert("无接收站内信的人");
+                ok = false;
+            }
+        }
+        return ok;
+    };
+</script>

@@ -104,7 +104,7 @@ namespace Logicore.Repository
                         {
                             Id = message.Id,
                             Title = message.Title,
-                            CreateDateTime = message.CreateDateTime
+                            CreateDateTime = message.CreateDateTime.ToString("f")
                         };
             return await query.ToListAsync();
         }

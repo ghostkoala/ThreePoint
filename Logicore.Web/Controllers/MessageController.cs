@@ -43,7 +43,7 @@ namespace Logicore.Web.Controllers
         /// 站内信发送
         /// </summary>
         /// <returns></returns>
-        [Menu(Id = Menu.MessageSendId, ParentId = Menu.SystemId, Name = "站内信发送", Order = "1")]
+        [Menu(Id = Menu.MessageSendId, ParentId = Menu.MessagePageId, Name = "站内信发送", Order = "1")]
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Send()
@@ -59,9 +59,11 @@ namespace Logicore.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Send(MessageDto dto)
         {
+            var ok = false;
             if (ModelState.IsValid)
             {
-                await _messageService.SendAsync(dto);
+                ok = await _messageService.SendAsync(dto);
+                return Content("<script >alert('发送成功！');window.open('" + Url.Content("/Message/Send") + "', '_self')</script >", "text/html");
             }
             return View();
         }
@@ -71,7 +73,7 @@ namespace Logicore.Web.Controllers
         /// </summary>
         /// <param name="id">站内信Id</param>
         /// <returns></returns>
-        [Menu(Id = Menu.MessageEditId, ParentId = Menu.SystemId, Name = "站内信修改", Order = "2")]
+        [Menu(Id = Menu.MessageEditId, ParentId = Menu.MessagePageId, Name = "站内信修改", Order = "2")]
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
@@ -108,7 +110,7 @@ namespace Logicore.Web.Controllers
         /// </summary>
         /// <param name="ids">ids</param>
         /// <returns></returns>
-        [Menu(Id = Menu.MessageDeleteId, ParentId = Menu.SystemId, Name = "站内信修改", Order = "3")]
+        [Menu(Id = Menu.MessageDeleteId, ParentId = Menu.MessagePageId, Name = "站内信修改", Order = "3")]
         [HttpPost]
         public async Task<IActionResult> Delete(IEnumerable<string> ids)
         {
