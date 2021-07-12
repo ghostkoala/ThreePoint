@@ -62,7 +62,6 @@ namespace Logicore.Web.Controllers
             if (ModelState.IsValid)
             {
                 await _messageService.SendAsync(dto);
-
             }
             return View();
         }

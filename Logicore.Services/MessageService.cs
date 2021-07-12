@@ -100,7 +100,7 @@ namespace Logicore.Services
 
         public Task<bool> SendAsync(MessageDto dto)
         {
-            if (dto.SendModel == SendModel.person)
+            if (dto.IsToAll == false)
             {
                 if (dto.ReceiverIds.Count() <= 0) throw new BusinessException("无接收者", 403);
             }

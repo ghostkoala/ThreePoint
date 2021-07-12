@@ -117,17 +117,18 @@ namespace Logicore.Repository
                 message.CreateBy(_httpContextAccessor.HttpContext.Session.GetString("Uid"));
                 message.Title = dto.Title;
                 message.Contents = dto.Contents;
-                if (dto.SendModel == SendModel.Toall)
+                var receiver = new MessageReceiverEntity();
+                if (dto.IsToAll)
                 {
                     var Ids = await dbContext.Admins.Where(x => x.IsDeleted == false).Select(x => x.Id).ToListAsync();
                     if (Ids.Count() <= 0) return false;
                     else message.Total = Ids.Count();
                     foreach (var item in Ids)
                     {
-                        message.MessageReceivers.Add(new MessageReceiverEntity()
-                        {
-                            UserId = item
-                        });
+                        receiver.Init();
+                        receiver.UserId = item;
+                        receiver.MessageId = message.Id;
+                        message.MessageReceivers.Add(receiver);
                     }
                 }
                 else
@@ -137,10 +138,10 @@ namespace Logicore.Repository
                     {
                         if (await _adminRepository.IsExist(item))
                         {
-                            message.MessageReceivers.Add(new MessageReceiverEntity()
-                            {
-                                UserId = item
-                            });
+                            receiver.Init();
+                            receiver.UserId = item;
+                            receiver.MessageId = message.Id;
+                            message.MessageReceivers.Add(receiver);
                         }
                         else
                         {

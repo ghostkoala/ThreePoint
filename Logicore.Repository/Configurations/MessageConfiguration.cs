@@ -16,6 +16,7 @@ namespace Logicore.Repository.Configurations
             builder.ToTable("Messages");
             builder.Property(x => x.Title).IsRequired().IsUnicode(true).HasMaxLength(50);
             builder.Property(x => x.Contents).IsRequired().IsUnicode(true).HasMaxLength(500);
+            builder.HasMany(x => x.MessageReceivers).WithOne(x => x.Message).HasForeignKey(x => x.MessageId);
         }
     }
 }

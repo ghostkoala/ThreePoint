@@ -30,6 +30,6 @@ namespace Logicore.Core.Enities
         /// <summary>
         /// 消息主体
         /// </summary>
-        public virtual MessageEntity Message { get; set; }
+        public virtual MessageEntity Message { get; set; } = new MessageEntity();
     }
 }

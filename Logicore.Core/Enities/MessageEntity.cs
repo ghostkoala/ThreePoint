@@ -30,6 +30,6 @@ namespace Logicore.Core.Enities
         /// <summary>
         /// 消息接收人
         /// </summary>
-        public virtual IList<MessageReceiverEntity> MessageReceivers { get; set; }
+        public virtual IList<MessageReceiverEntity> MessageReceivers { get; set; } = new List<MessageReceiverEntity>();
     }
 }

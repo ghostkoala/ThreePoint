@@ -40,9 +40,8 @@ namespace Logicore.Core.ServerModels
         /// 是否发送至所有人
         /// </summary>
         /// <value></value>
-        [Display(Name = "发送选项")]
-        [Required(ErrorMessage = ModelStateValidMessage.Required)]
-        public SendModel SendModel { get; set; }
+        [Display(Name = "发送给所有人")]
+        public bool IsToAll { get; set; }
 
         /// <summary>
         /// 接收者
@@ -52,14 +51,4 @@ namespace Logicore.Core.ServerModels
         public IEnumerable<string> ReceiverIds { get; set; }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    public enum SendModel
-    {
-        //所有人
-        Toall,
-        //个人
-        person
-    }
 }

@@ -14,21 +14,30 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Contents, new { @class = "col-md-2 control-label" })
         <div class="col-sm-8">
-            @Html.TextAreaFor(m => m.Contents, new {@style="height:200px", @class = "form-control", placeholder = "请输入内容" })
+            @Html.TextAreaFor(m => m.Contents, new {@style="height:300px", @class = "form-control", placeholder = "请输入内容" })
             <span style="color: red;">@Html.ValidationMessageFor(m => m.Contents)</span>
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.SendModel, new { @class = "col-md-2 control-label" })
-        <label class="radio-inline">
-            &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="SendModel" id="inlineRadio1" value=0 checked>
-            所有人&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="radio" name="SendModel" id="inlineRadio2" value=1> 个人
-        </label>
+        <label class="col-sm-3 control-label">发送给所有人</label>
+        <div class="col-sm-8">
+            <select id="IsToAll" name="IsToAll" class="form-control">
+                <option value="false">否</option>
+                <option value="true">是</option>
+            </select>
+        </div>
     </div>
     <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">发送</button>
+        <label class="col-sm-3 control-label" asp-for="UserIds"></label>
+        <div class="col-sm-8">
+            <select id="ReceiverIds" name="ReceiverIds" class="form-control" multiple="multiple"></select>
+            <span asp-validation-for="ReceiverIds"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10 btn-group">
+            <button type="reset" class="btn btn-default">重 置</button>
+            <button type="submit" class="btn btn-default">发 送</button>
         </div>
     </div>
 }
