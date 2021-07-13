@@ -99,5 +99,12 @@ namespace Logicore.IRepository
         /// <param name="id">Id</param>
         /// <returns></returns>
         Task<bool> IsExist(string id);
+
+        /// <summary>
+        /// 管理员下拉菜单
+        /// </summary>
+        /// <param name="filter">过滤</param>
+        /// <returns></returns>
+        Task<List<DropDownAdminViewModel>> DropDownAdminSeachAsync(DropDownAdminFilter filter);
     }
 }

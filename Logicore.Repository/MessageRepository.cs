@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Logicore.Core.Enities;
 using Logicore.Core.Enities.ServiceModel;
+using Logicore.Core.Extensions;
 using Logicore.Core.Exceptions;
 using Logicore.Core.Filters;
 using Logicore.Core.ServerModels;
@@ -134,8 +135,14 @@ namespace Logicore.Repository
                 else
                 {
                     if (dto.ReceiverIds.Count() <= 0) return false;
+                    message.Total = dto.ReceiverIds.Count();
                     foreach (var item in dto.ReceiverIds)
                     {
+                        if (item.IsBlank())
+                        {
+                            message.Total -= 1;
+                            continue;
+                        }
                         if (await _adminRepository.IsExist(item))
                         {
                             receiver.Init();

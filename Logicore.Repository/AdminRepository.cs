@@ -231,5 +231,23 @@ namespace Logicore.Repository
                 return await dbContext.Admins.Where(x => x.IsDeleted == false).AnyAsync(x => x.Id == id);
             }
         }
+
+        public async Task<List<DropDownAdminViewModel>> DropDownAdminSeachAsync(DropDownAdminFilter filter)
+        {
+            using (var dbContext = _dbContextFactory.CreateDbContext(DbContextType.Read))
+            {
+                var viewModel = new List<DropDownAdminViewModel>();
+                var entity = await dbContext.Admins.Select(x => new { x.Id, x.RealName }).ToListAsync();
+                foreach (var item in entity)
+                {
+                    viewModel.Add(new DropDownAdminViewModel()
+                    {
+                        Id = item.Id,
+                        Name = item.RealName
+                    });
+                }
+                return viewModel;
+            }
+        }
     }
 }

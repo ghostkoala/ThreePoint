@@ -35,8 +35,7 @@ namespace Logicore.Services
 
         public async Task<List<DropDownDepartmentViewModel>> DropDownDepartmentSeachAsync(DropDownDepartmentFilter filter)
         {
-            var viewModel = await _departmentRepository.DropDownDepartmentSeachAsync(filter);
-            return viewModel;
+            return await _departmentRepository.DropDownDepartmentSeachAsync(filter);
         }
 
         public async Task<bool> EditAsync(DepartmentDto dto)

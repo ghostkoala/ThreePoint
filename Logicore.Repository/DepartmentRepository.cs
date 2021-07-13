@@ -86,9 +86,9 @@ namespace Logicore.Repository
 
         public async Task<List<DropDownDepartmentViewModel>> DropDownDepartmentSeachAsync(DropDownDepartmentFilter filter)
         {
-            List<DropDownDepartmentViewModel> viewModel = new List<DropDownDepartmentViewModel>();
             using (var dbContext = _dbContextFactory.CreateDbContext(DbContextType.Read))
             {
+                var viewModel = new List<DropDownDepartmentViewModel>();
                 var entity = await dbContext.Departments.Select(x => new { x.Id, x.Name }).ToListAsync();
                 foreach (var item in entity)
                 {
@@ -98,8 +98,8 @@ namespace Logicore.Repository
                         Name = item.Name
                     });
                 }
+                return viewModel;
             }
-            return viewModel;
         }
 
         public async Task<bool> EditAsync(DepartmentDto dto)

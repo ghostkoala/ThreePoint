@@ -236,5 +236,14 @@ namespace Logicore.Web.Controllers
                 return Json(result);
             }
         }
+
+        [ParentPermission(null, "Message", "Send")]
+        public async Task<IActionResult> DropDownAdminSearch(DropDownAdminFilter filter)
+        {
+            if (filter.model == null) return null;
+            ViewBag.WhatModel = filter.model;
+            var list = await _adminService.DropDownAdminSeachAsync(filter);
+            return View(list);
+        }
     }
 }

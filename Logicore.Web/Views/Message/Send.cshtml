@@ -9,6 +9,7 @@
     id = "editform"
 }))
 {
+    @Html.Hidden("SendMessageToken",ViewData["SendMessageToken"])
     <div class="form-group">
         @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })
         <div class="col-sm-8">
@@ -35,7 +36,7 @@
     <div id="ReceiverDiv" class="form-group">
         <label class="col-sm-2 control-label" asp-for="ReceiverIds">接收者：</label>
         <div class="col-sm-10">
-            <select id="ReceiverIds" name="ReceiverIds" class="form-control" multiple="multiple"></select>
+            <select id="ReceiverIds" name="ReceiverIds" class="form-control" multiple="multiple" size="5"></select>
             <span asp-validation-for="ReceiverIds"></span>
         </div>
     </div>
@@ -48,6 +49,13 @@
 }
 
 <script>
+    //页面加载事件
+    $(document).ready(function() { 
+        console.log("开始加载");
+        $("#ReceiverIds").load("/Admin/DropDownAdminSearch", { model: 2 });
+    });
+
+    //发送给所有人选择事件
     $("select#IsToAll").change(function (obj) {
         var hide = $(this).val();//获取点击当前option的value值
         console.log(hide);

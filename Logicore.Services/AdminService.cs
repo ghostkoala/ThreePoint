@@ -46,6 +46,11 @@ namespace Logicore.Services
             return await _adminRepository.DeleteAsync(ids);
         }
 
+        public async Task<List<DropDownAdminViewModel>> DropDownAdminSeachAsync(DropDownAdminFilter filter)
+        {
+            return await _adminRepository.DropDownAdminSeachAsync(filter);
+        }
+
         public async Task<bool> EditAsync(AdminDto dto)
         {
             return await _adminRepository.UpdataAsync(dto);

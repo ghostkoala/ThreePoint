@@ -10,6 +10,8 @@ using Logicore.Web.Extensions;
 using Logicore.Core.Extensions;
 using Logicore.Web.Filters;
 using Logicore.Core.Filters;
+using System;
+using Microsoft.AspNetCore.Http;
 
 namespace Logicore.Web.Controllers
 {
@@ -45,9 +47,11 @@ namespace Logicore.Web.Controllers
         /// <returns></returns>
         [Menu(Id = Menu.MessageSendId, ParentId = Menu.MessagePageId, Name = "站内信发送", Order = "1")]
         [HttpGet]
-        [AllowAnonymous]
         public IActionResult Send()
         {
+            string sendToken = Guid.NewGuid().ToString("N");
+            ViewData["SendMessageToken"] = sendToken;
+            HttpContext.Session.SetString("SendMessageToken", sendToken);
             return View();
         }
 
@@ -56,14 +60,21 @@ namespace Logicore.Web.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [AllowAnonymous]
         public async Task<IActionResult> Send(MessageDto dto)
         {
-            var ok = false;
+            var sendToken = HttpContext.Session.GetString("SendMessageToken");
+            string ReceiveToken = HttpContext.Request.Form["SendMessageToken"];
+            if (ReceiveToken.IsBlank()) return RedirectToAction("Send");
+            if (sendToken != ReceiveToken)
+                return Content("<script >alert('请勿二次提交数据');window.open('" + Url.Content("/Message/Send") + "', '_self')</script >", "text/html");
             if (ModelState.IsValid)
             {
-                ok = await _messageService.SendAsync(dto);
-                return Content("<script >alert('发送成功！');window.open('" + Url.Content("/Message/Send") + "', '_self')</script >", "text/html");
+                var ok = await _messageService.SendAsync(dto);
+                HttpContext.Session.Remove("SendMessageToken");
+                if (ok)
+                    return Content("<script >alert('发送成功！');window.open('" + Url.Content("/Message/Send") + "', '_self')</script >", "text/html");
+                else
+                    return Content("<script >alert('发送成功！');window.open('" + Url.Content("/Message/Send") + "', '_self')</script >", "text/html");
             }
             return View();
         }

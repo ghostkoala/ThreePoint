@@ -79,6 +79,7 @@ namespace Logicore.Services
                     Id = item.Id,
                     Title = item.Title,
                     Contents = item.Contents,
+                    Total = item.Total,
                     CreateDateTime = item.CreateDateTime.ToString("f"),
                     ReadedNumber = item.ReadedNumber,
                 });
