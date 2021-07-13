@@ -1,9 +1,14 @@
 @using Microsoft.AspNetCore.Mvc.Rendering
 @model Logicore.Core.ServerModels.MessageDto
 <div class="form-group"></div>
-@using (Html.BeginForm(FormMethod.Post, new { @onsubmit="return CheckValid()", @class = "form-horizontal", name = "editform", id = "editform" }))
+@using (Html.BeginForm(FormMethod.Post, new
 {
-    @Html.HiddenFor(m => m.Id)
+    @onsubmit = "return CheckValid()",
+    @class = "form-horizontal",
+    name = "editform",
+    id = "editform"
+}))
+{
     <div class="form-group">
         @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })
         <div class="col-sm-8">
@@ -28,7 +33,7 @@
         </div>
     </div>
     <div id="ReceiverDiv" class="form-group">
-        <label class="col-sm-2 control-label" asp-for="ReceiverIds"></label>
+        <label class="col-sm-2 control-label" asp-for="ReceiverIds">接收者：</label>
         <div class="col-sm-10">
             <select id="ReceiverIds" name="ReceiverIds" class="form-control" multiple="multiple"></select>
             <span asp-validation-for="ReceiverIds"></span>
@@ -44,12 +49,12 @@
 
 <script>
     $("select#IsToAll").change(function (obj) {
-        var hide=$(this).val();//获取点击当前option的value值
+        var hide = $(this).val();//获取点击当前option的value值
         console.log(hide);
-        if(hide=="false"){
+        if (hide == "false") {
             $("#ReceiverDiv").show();
         }
-        else{
+        else {
             $("#ReceiverDiv").hide();
         }
     });
@@ -58,9 +63,9 @@
     function CheckValid() {
         var ok = true;
         console.log($("select#IsToAll").val());
-        if($("select#IsToAll").val() == "false"){
+        if ($("select#IsToAll").val() == "false") {
             console.log($("select#ReceiverIds").val());
-            if($("select#ReceiverIds").val().length <= 0){
+            if ($("select#ReceiverIds").val().length <= 0) {
                 alert("无接收站内信的人");
                 ok = false;
             }
