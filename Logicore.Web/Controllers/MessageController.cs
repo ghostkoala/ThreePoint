@@ -74,7 +74,7 @@ namespace Logicore.Web.Controllers
                 if (ok)
                     return Content("<script >alert('发送成功！');window.open('" + Url.Content("/Message/Send") + "', '_self')</script >", "text/html");
                 else
-                    return Content("<script >alert('发送成功！');window.open('" + Url.Content("/Message/Send") + "', '_self')</script >", "text/html");
+                    return Content("<script >alert('发送失败！');window.open('" + Url.Content("/Message/Send") + "', '_self')</script >", "text/html");
             }
             return View();
         }
@@ -102,18 +102,13 @@ namespace Logicore.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = new ResultModel<bool>();
-                result.Data = await _messageService.EditAsync(dto);
-                if (result.Data) result.Status = true;
-                return Json(result);
+                var ok = await _messageService.EditAsync(dto);
+                if (ok)
+                    return Content("<script >alert('修改成功！');parent.window.nthTabs.delTab();</script >", "text/html");
+                else
+                    return Content("<script >alert('修改失败！');window.open('" + Url.Content("/Message/Edit/" + dto.Id) + "', '_self')</script >", "text/html");
             }
-            else
-            {
-                //找到出错的字段以及出错信息
-                var modelErrors = this.ExpendErrors();
-                var result = new ResultModel<List<string>>(410, false, "输入的数据有误", modelErrors);
-                return Json(result);
-            }
+            return View();
         }
 
         /// <summary>
@@ -133,12 +128,19 @@ namespace Logicore.Web.Controllers
             return Json(result);
         }
 
-        [ParentPermission(null, "Admin", "Index")]
+        [ParentPermission(null, "Message", "Index")]
         public async Task<JsonResult> GetMessageForTable(MessageFilter filter)
         {
             var rows = await _messageService.GetMessageForTableAsync(filter);
             if (rows == null) return null;
             return Json(new { total = rows.records, rows = rows.rows });
+        }
+
+        [ParentPermission(null, "Message", "Index")]
+        public async Task<IActionResult> GetMessageDetails(string id)
+        {
+            var result = await _messageService.GetMessageDetails(id);
+            return View(result);
         }
     }
 }

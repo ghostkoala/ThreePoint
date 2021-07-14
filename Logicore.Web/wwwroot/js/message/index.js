@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-05-13 14:09:31
- * @LastEditTime: 2021-06-03 14:03:33
+ * @LastEditTime: 2021-07-14 13:38:34
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Logicore\Logicore.Web\wwwroot\js\menu\index.js
@@ -29,36 +29,6 @@ var TableInit = function () {
     columns.push({ field: 'readednumber', title: '已读人数', align: 'center', valign: 'middle', width: 120 });
     columns.push({ field: 'total', title: '总接收人数', align: 'center', valign: 'middle', width: 120 });
     columns.push({ field: 'createdatetime', title: '创建时间', align: 'center', valign: 'middle', width: 120 });
-    // columns.push({
-    //     field: 'operate',
-    //     title: '操作',
-    //     formatter: btnGroup,    // 自定义方法，添加按钮组
-    //     events: {               // 注册按钮组事件
-    //         'click #modRole': function (event, value, row, index) {
-    //             showUser(row.id, row.username)
-    //         },
-    //         'click #modUser': function (event, value, row, index) {
-    //             showInfo(row.id, row.username, row.user)
-    //         },
-    //         'click #delUser': function (event, value, row, index) {
-    //             showUsername(row.id, row.username)
-    //         }
-    //     }
-    // });
-
-    // function btnGroup() {   // 自定义方法，添加操作按钮
-    //     // data-target="xxx" 为点击按钮弹出指定名字的模态框
-    //     let html =
-    //         '<a href="####" class="btn btn-info" id="modRole" data-toggle="modal" data-target="#editrole" title="修改权限">' +
-    //         '<span class="glyphicon glyphicon-edit"></span></a>' +
-    //         '<a href="####" class="btn btn-warning" id="modUser" data-toggle="modal" data-target="#editinfo" ' +
-    //         'style="margin-left:15px" title="修改用户">' +
-    //         '<span class="glyphicon glyphicon-info-sign"></span></a>' +
-    //         '<a href="####" class="btn btn-danger" id="delUser" data-toggle="modal" data-target="#deleteuser" ' +
-    //         'style="margin-left:15px" title="删除用户">' +
-    //         '<span class="glyphicon glyphicon-trash"></span></a>'
-    //     return html
-    // };
 
     var oTableInit = new Object();
     //初始化Table
@@ -112,6 +82,30 @@ var ButtonInit = function () {
     var oInit = new Object();
 
     oInit.Init = function () {
+        //修改按钮事件
+        $("#btn_edit").click(function () {
+            var arrselections = $("#tb_messages").bootstrapTable('getSelections');
+            //console.log(arrselections[0].id);
+            if (arrselections.length > 1) {
+                toastr.warning('只能选择一行进行编辑');
+                return;
+            }
+            if (arrselections.length <= 0) {
+                toastr.warning('请选择要编辑的数据');
+                return;
+            }
+
+            var obj = {
+                dataset: {
+                    url: "/Message/Edit/" + arrselections[0].id,
+                    id: "EditMessageFrame",
+                    value: "修改站内信"
+                }
+            };
+            parent.window.newTabs(obj);
+            return false;
+        });
+
         //删除按钮事件
         $("#btn_delete").click(function () {
             var arrselections = $("#tb_messages").bootstrapTable('getSelections');

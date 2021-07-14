@@ -60,5 +60,12 @@ namespace Logicore.IServices
         /// <param name="filter">过滤</param>
         /// <returns></returns>
         Task<PageResult<MessageQueryViewModel>> GetMessageForTableAsync(MessageFilter filter);
+
+        /// <summary>
+        /// 获取站内信详细信息
+        /// </summary>
+        /// <param name="id">id</param>
+        /// <returns></returns>
+        Task<MessageQueryViewModel> GetMessageDetails(string id);
     }
 }

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-05-16 13:57:04
- * @LastEditTime: 2021-06-06 13:22:14
+ * @LastEditTime: 2021-07-14 13:51:22
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Logicore\Logicore.Web\wwwroot\js\home\index.js
@@ -79,7 +79,6 @@ $(function () {
     });
 });
 
-
 //列表样式初始化
 (function ($) {
     $.expr[":"].Contains = function (a, i, m) {
@@ -117,7 +116,6 @@ $(function () {
     });
 })(jQuery);
 
-
 //监听模态框关闭事件开始
 $("#editInfoModalLabel").on("hidden.bs.modal", function () {
     // 这个#showModal是模态框的id
@@ -138,6 +136,7 @@ $("#loginLogLabel").on("hidden.bs.modal", function () {
 });
 //监听模态框关闭事件结束
 
+//打开用户信息模态框
 function openInfoModal() {
     $("#editInfoModal").load("/Admin/EditGeneralInfo", function (responseTxt, statusTxt, xhr) {
         $('#editInfoModal').modal('show');
@@ -145,6 +144,7 @@ function openInfoModal() {
     return false;
 };
 
+//打开修改密码模态框
 function openEditPasswordModal() {
     // 打开模态框
     $("#editPasswordModal").load("/Admin/EditPassword", function (responseTxt, statusTxt, xhr) {

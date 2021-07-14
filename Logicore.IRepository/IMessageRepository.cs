@@ -73,5 +73,12 @@ namespace Logicore.IRepository
         /// <param name="filter">基础过滤</param>
         /// <returns></returns>
         Task<PageResult<MessageEntity>> FindUserAsync(string id, string title, BaseFilter filter);
+
+        /// <summary>
+        /// 获取站内信详细信息
+        /// </summary>
+        /// <param name="id">id</param>
+        /// <returns></returns>
+        Task<MessageQueryViewModel> GetMessageDetails(string id);
     }
 }
