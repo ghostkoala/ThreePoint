@@ -8,6 +8,14 @@ namespace Logicore.Core.Enities
     public partial class MessageEntity : BaseEntity
     {
         /// <summary>
+        /// ctor
+        /// </summary>
+        public MessageEntity()
+        {
+            MessageReceivers = new List<MessageReceiverEntity>();
+        }
+
+        /// <summary>
         /// 标题
         /// </summary>
         public string Title { get; set; }

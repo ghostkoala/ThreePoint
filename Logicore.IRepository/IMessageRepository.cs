@@ -79,6 +79,6 @@ namespace Logicore.IRepository
         /// </summary>
         /// <param name="id">id</param>
         /// <returns></returns>
-        Task<MessageQueryViewModel> GetMessageDetails(string id);
+        Task<MessageEntity> GetMessageDetails(string id);
     }
 }

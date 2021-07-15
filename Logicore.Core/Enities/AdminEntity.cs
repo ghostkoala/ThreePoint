@@ -60,8 +60,14 @@ namespace Logicore.Core.Enities
         public virtual RoleEntity Role { get; set; }
 
         /// <summary>
-        /// 部门
+        /// 部门主体
         /// </summary>
         public virtual DepartmentEntity Department { get; set; }
+
+        /// <summary>
+        /// 消息主体
+        /// </summary>
+        /// <value></value>
+        public virtual IList<MessageReceiverEntity> MessageReceivers { get; set; }
     }
 }

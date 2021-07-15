@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-05-13 14:09:31
- * @LastEditTime: 2021-07-14 13:38:34
+ * @LastEditTime: 2021-07-15 17:24:16
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Logicore\Logicore.Web\wwwroot\js\menu\index.js
@@ -99,6 +99,30 @@ var ButtonInit = function () {
                 dataset: {
                     url: "/Message/Edit/" + arrselections[0].id,
                     id: "EditMessageFrame",
+                    value: "修改站内信"
+                }
+            };
+            parent.window.newTabs(obj);
+            return false;
+        });
+
+        //站内信详情事件
+        $("#btn_detail").click(function () {
+            var arrselections = $("#tb_messages").bootstrapTable('getSelections');
+            //console.log(arrselections[0].id);
+            if (arrselections.length > 1) {
+                toastr.warning('只能选择一行进行查看');
+                return;
+            }
+            if (arrselections.length <= 0) {
+                toastr.warning('请选择要查看的信息');
+                return;
+            }
+
+            var obj = {
+                dataset: {
+                    url: "/Message/GetMessageDetails/" + arrselections[0].id,
+                    id: "ShowMessageDetailFrame",
                     value: "修改站内信"
                 }
             };

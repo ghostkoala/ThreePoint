@@ -7,6 +7,10 @@ namespace Logicore.Core.Enities
     /// </summary>
     public partial class MessageReceiverEntity : BaseEntity
     {
+        public MessageReceiverEntity()
+        {
+
+        }
         /// <summary>
         /// 消息Id
         /// </summary>
@@ -26,6 +30,12 @@ namespace Logicore.Core.Enities
         /// 查看时间
         /// </summary>
         public DateTime? ReadDate { get; set; }
+
+        /// <summary>
+        /// 管理员主体
+        /// </summary>
+        /// <value></value>
+        public virtual AdminEntity Admin { get; set; }
 
         /// <summary>
         /// 消息主体

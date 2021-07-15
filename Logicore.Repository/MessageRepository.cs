@@ -199,5 +199,14 @@ namespace Logicore.Repository
                 return result;
             }
         }
+
+        public Task<MessageEntity> GetMessageDetails(string id)
+        {
+            using (var dbContext = _dbContextFactory.CreateDbContext(DbContextType.Read))
+            {
+                return dbContext.Messages.Include(x => x.MessageReceivers).ThenInclude(x => x.Admin).AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == id);
+            }
+        }
     }
 }

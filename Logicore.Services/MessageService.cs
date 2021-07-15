@@ -24,7 +24,7 @@ namespace Logicore.Services
 
         public MessageService(IMessageRepository messageRepository)
         {
-            _messageRepository = messageRepository;
+            _messageRepository = messageRepository; ;
         }
 
         public Task<bool> DeleteAsync(IEnumerable<string> ids)
@@ -54,6 +54,33 @@ namespace Logicore.Services
                 dto.ReceiverIds = entity.MessageReceivers.Select(x => x.Id).ToList();
             }
             return dto;
+        }
+
+        public async Task<MessageQueryViewModel> GetMessageDetails(string id)
+        {
+            var result = await _messageRepository.GetMessageDetails(id);
+            var detail = new List<MessageDetailViewModel>();
+            foreach (var item in result.MessageReceivers)
+            {
+                detail.Add(new MessageDetailViewModel()
+                {
+                    UserId = item.Id,
+                    IsReaded = item.IsReaded,
+                    UserName = item.Admin.RealName,
+                    ReadDate = item.ReadDate
+                });
+            }
+            var messageDetail = new MessageQueryViewModel()
+            {
+                Id = result.Id,
+                Title = result.Title,
+                Contents = result.Contents,
+                CreateDateTime = result.CreateDateTime.ToString("f"),
+                ReadedNumber = result.ReadedNumber,
+                Total = result.Total,
+                Details = detail
+            };
+            return messageDetail;
         }
 
         public async Task<PageResult<MessageQueryViewModel>> GetMessageForTableAsync(MessageFilter filter)

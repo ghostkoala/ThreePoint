@@ -8,6 +8,13 @@ namespace Logicore.Core.ViewModel
     /// </summary>
     public class MessageQueryViewModel
     {
+        /// <summary>
+        /// ctor
+        /// </summary>
+        public MessageQueryViewModel()
+        {
+            Details = new List<MessageDetailViewModel>();
+        }
         public string Id { get; set; }
 
         /// <summary>

@@ -18,6 +18,7 @@ namespace Logicore.Repository.Configurations
             builder.Property(x => x.MessageId).IsRequired().HasMaxLength(36);
             builder.Property(x => x.IsReaded).IsRequired();
             builder.HasOne(x => x.Message).WithMany(x => x.MessageReceivers).HasForeignKey(x => x.MessageId);
+            builder.HasOne(x => x.Admin).WithMany(x => x.MessageReceivers).HasForeignKey(x => x.UserId);
         }
     }
 }
