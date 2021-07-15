@@ -19,11 +19,11 @@ namespace Logicore.Core.Enities
         /// <summary>
         /// 角色
         /// </summary>
-        public virtual RoleEntity Role { get; set; }
+        public virtual RoleEntity Role { get; set; } = new RoleEntity();
 
         /// <summary>
         /// 菜单
         /// </summary>
-        public virtual MenuEntity Menu { get; set; }
+        public virtual MenuEntity Menu { get; set; } = new MenuEntity();
     }
 }

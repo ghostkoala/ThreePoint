@@ -98,8 +98,8 @@ var ButtonInit = function () {
             var obj = {
                 dataset: {
                     url: "/Message/Edit/" + arrselections[0].id,
-                    id: "EditMessageFrame",
-                    value: "修改站内信"
+                    id: "EditMessageFrame" + arrselections[0].id,
+                    value: "修改 " + arrselections[0].title + " 站内信"
                 }
             };
             parent.window.newTabs(obj);
@@ -122,8 +122,8 @@ var ButtonInit = function () {
             var obj = {
                 dataset: {
                     url: "/Message/GetMessageDetails/" + arrselections[0].id,
-                    id: "ShowMessageDetailFrame",
-                    value: "修改站内信"
+                    id: "ShowMessageDetail" + arrselections[0].id,
+                    value: arrselections[0].title + " 详细信息"
                 }
             };
             parent.window.newTabs(obj);

@@ -32,7 +32,5 @@ namespace Logicore.Core.ViewModel
         /// </summary>
         /// <value></value>
         public DateTime CreateDateTime { get; set; }
-
-
     }
 }

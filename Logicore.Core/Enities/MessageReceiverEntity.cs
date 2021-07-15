@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Logicore.Core.Enities
 {
@@ -7,10 +8,6 @@ namespace Logicore.Core.Enities
     /// </summary>
     public partial class MessageReceiverEntity : BaseEntity
     {
-        public MessageReceiverEntity()
-        {
-
-        }
         /// <summary>
         /// 消息Id
         /// </summary>
@@ -35,7 +32,7 @@ namespace Logicore.Core.Enities
         /// 管理员主体
         /// </summary>
         /// <value></value>
-        public virtual AdminEntity Admin { get; set; }
+        public virtual AdminEntity Admin { get; set; } = new AdminEntity();
 
         /// <summary>
         /// 消息主体

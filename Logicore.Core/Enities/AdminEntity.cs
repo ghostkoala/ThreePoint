@@ -57,17 +57,17 @@ namespace Logicore.Core.Enities
         /// <summary>
         /// 用户拥有的角色
         /// </summary>
-        public virtual RoleEntity Role { get; set; }
+        public virtual RoleEntity Role { get; set; } = new RoleEntity();
 
         /// <summary>
         /// 部门主体
         /// </summary>
-        public virtual DepartmentEntity Department { get; set; }
+        public virtual DepartmentEntity Department { get; set; } = new DepartmentEntity();
 
         /// <summary>
         /// 消息主体
         /// </summary>
         /// <value></value>
-        public virtual IList<MessageReceiverEntity> MessageReceivers { get; set; }
+        public virtual IList<MessageReceiverEntity> MessageReceivers { get; set; } = new List<MessageReceiverEntity>();
     }
 }

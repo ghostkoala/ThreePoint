@@ -11,15 +11,20 @@
 var nthTabs;
 $(function () {
     //一个低门槛的演示,更多需求看源码
-    //基于bootstrap tab的自定义多标签的jquery实用插件，滚动条依赖jquery.scrollbar，图标依赖font-awesome
-    nthTabs = $("#editor-tabs").nthTabs();
+    //基于bootstrap tab的自定义多标签的jquery实用插件
+    nthTabs = $("#main-tabs").nthTabs();
+
+    // 新建选项卡示例
     nthTabs.addTab({
-        id: 'IndexPage',
+        id: 'home',
         title: '首页',
-        content: '<iframe class="embed-responsive-item" id="IFrameIndexPage" src="/Home/Welcome" solling="no" style="width:100%;height:calc(68vh);" frameborder="0"></iframe>',
-        active: true,
-        allowClose: false,
-    }).setActTab("#IndexPage");
+        url: "/Home/Welcome",
+        //content: '这是首页',
+        active: true, // 是否激活状态，默认是
+        allowClose: false, //是否可关闭，默认是
+        location: true, //是否自动定位，默认是
+        fadeIn: true //是否开启淡入淡出效果，默认是
+    });
 });
 
 function newTabs(obj) {
@@ -32,38 +37,15 @@ function newTabs(obj) {
     //<a>标签内容
     title = obj.dataset.value;
 
-    //选项卡存在则激活选项卡
-    if (isExistTabWidth(index)) {
-        nthTabs.setActTab("#" + index);
-        return false;
-    }
-
-    content = newIframe(url, "IFrame" + index);
-    //content = $.get(url, function (data, status) { });
-    //console.log(content);
-
     nthTabs.addTab({
         id: index,
         title: title,
-        content: content
-    }).setActTab("#" + index);
-}
-//选项卡自定义函数
-function newIframe(url, id) {
-    return '<iframe id="' + id + '" src="' + url + '" class="embed-responsive-item" solling="no" style="width:100%;height:calc(68vh);" frameborder="0"></iframe>'
-}
-function isExistTabWidth(id) {
-    id = "#" + id;
-    var i = 0; $(".content-tabs-container").find(".nav-tabs li").each(function () {
-        isExist = false;
-        hrefValue = $(this).find("a").attr("href");
-        if (id == hrefValue) {
-            isExist = true;
-            return false;
-        }
+        url: url,
+        //content: content,
+        active: true,
     });
-    return isExist;
 }
+
 //选项卡操作
 //左侧导航栏操作
 jQuery(document).ready(function () {
@@ -151,4 +133,9 @@ function openEditPasswordModal() {
         $('#editPasswordModal').modal('show');
     });
     return false;
+};
+
+//打开要读的信息
+function readMessage() {
+
 };

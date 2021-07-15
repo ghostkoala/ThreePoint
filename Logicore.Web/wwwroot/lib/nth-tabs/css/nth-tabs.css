@@ -41,18 +41,23 @@
 	overflow: auto;
 }
 .nth-tabs,.tab-content,.tab-pane{
-	height: 100%;
-	/*height: calc(100% - 42px);*/
+	height: 100%; 
+	/* height: calc(100% - 42px); */
 }
+
+.tab-pane.animation-fade.active{
+	overflow: visible;
+}
+
 .nth-tabs-content{
 	width:100%;
-	height: calc(100% - 42px);
+	height: calc(100%);
 	position: relative;
 	overflow-x: hidden;
 }
 .nth-tabs-frame{
 	width:100%;
-	height: calc(100% - 42px);
+	height: calc(100%);
 	position: relative;
 	overflow-x: hidden;
 }

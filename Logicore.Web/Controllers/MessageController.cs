@@ -142,5 +142,10 @@ namespace Logicore.Web.Controllers
             var result = await _messageService.GetMessageDetails(id);
             return View(result);
         }
+
+        public async Task<IActionResult> ReadMessage(string id)
+        {
+            return View();
+        }
     }
 }

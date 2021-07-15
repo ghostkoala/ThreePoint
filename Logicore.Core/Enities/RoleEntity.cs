@@ -10,14 +10,6 @@ namespace Logicore.Core.Enities
     public class RoleEntity : BaseEntity
     {
         /// <summary>
-        /// ctor
-        /// </summary>
-        public RoleEntity()
-        {
-            Admins = new List<AdminEntity>();
-        }
-
-        /// <summary>
         /// 角色名称
         /// </summary>
         public string Name { get; set; }
@@ -35,11 +27,11 @@ namespace Logicore.Core.Enities
         /// <summary>
         /// 角色菜单关系
         /// </summary>
-        public virtual IList<RoleMenuEntity> RoleMenus { get; set; }
+        public virtual IList<RoleMenuEntity> RoleMenus { get; set; } = new List<RoleMenuEntity>();
 
         /// <summary>
         /// 此角色下的管理员
         /// </summary>
-        public virtual IList<AdminEntity> Admins { get; set; }
+        public virtual IList<AdminEntity> Admins { get; set; } = new List<AdminEntity>();
     }
 }

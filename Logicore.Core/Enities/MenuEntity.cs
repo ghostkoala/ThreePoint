@@ -56,7 +56,7 @@ namespace Logicore.Core.Enities
         /// <summary>
         /// 角色菜单关系
         /// </summary>
-        public virtual IList<RoleMenuEntity> RoleMenus { get; set; }
+        public virtual IList<RoleMenuEntity> RoleMenus { get; set; } = new List<RoleMenuEntity>();
 
         public static implicit operator MenuEntity(MenuDto v)
         {

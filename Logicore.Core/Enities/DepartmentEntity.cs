@@ -7,11 +7,6 @@ namespace Logicore.Core.Enities
     /// </summary>
     public class DepartmentEntity : BaseEntity
     {
-        public DepartmentEntity()
-        {
-            Admins = new List<AdminEntity>();
-        }
-
         /// <summary>
         /// 部门名称
         /// </summary>
@@ -40,6 +35,6 @@ namespace Logicore.Core.Enities
         /// <summary>
         /// 此部门下的管理员
         /// </summary>
-        public virtual IList<AdminEntity> Admins { get; set; }
+        public virtual IList<AdminEntity> Admins { get; set; } = new List<AdminEntity>();
     }
 }
