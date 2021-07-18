@@ -250,3 +250,4 @@ Logicore.Web/obj/Debug/netcoreapp3.1/Razor/Views/Message/Send.cshtml.g.cs
 Logicore.Web/wwwroot/lib/nth-tabs/README.md
 Logicore.Web/obj/Debug/netcoreapp3.1/Razor/Views/Message/GetMessageDetails.cshtml.g.cs
 Logicore.Web/obj/Debug/netcoreapp3.1/Razor/Views/Admin/DropDownAdminSearch.cshtml.g.cs
+Logicore.Web/obj/Debug/netcoreapp3.1/Razor/Views/Message/ReadMessage.cshtml.g.cs

@@ -126,6 +126,20 @@ namespace Logicore.Services
             return message;
         }
 
+        public async Task<ReceiverMessageViewModel> ReadMessageAsync(string id)
+        {
+            var message = await _messageRepository.ReadMessageAsync(id);
+            if (message == null) return null;
+            return new ReceiverMessageViewModel()
+            {
+                Title = message.Message.Title,
+                Contents = message.Message.Contents,
+                IsReaded = message.IsReaded,
+                FirstReadDate = message.ReadDate?.ToString("f"),
+                CreateDateTime = message.CreateDateTime.ToString("f")
+            };
+        }
+
         public Task<bool> SendAsync(MessageDto dto)
         {
             if (dto.IsToAll == false)
