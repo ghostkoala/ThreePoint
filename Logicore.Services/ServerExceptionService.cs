@@ -39,7 +39,7 @@ namespace Logicore.Services
 
         public async Task<PageResult<ServerExceptionTableViewModel>> GetServerExceptionForTable(ServerExceptionFilter filter)
         {
-            Expression<Func<ServerExceptionEntity, bool>> exp = null;
+            Expression<Func<ServerExceptionEntity, bool>> exp = x => x.Id != null;
             if (filter.StartTime != null)
                 exp = exp.And(x => x.CreateTime >= filter.StartTime);
             if (filter.EndTime != null)

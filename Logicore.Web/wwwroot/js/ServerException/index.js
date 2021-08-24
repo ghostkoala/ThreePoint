@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-08-17 16:39:35
- * @LastEditTime: 2021-08-19 16:52:23
+ * @LastEditTime: 2021-08-24 17:06:16
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Logicore\Logicore.Web\wwwroot\js\ServerException\index.js
@@ -47,6 +47,7 @@ $(function () {
             $('#date_start').datetimepicker('setEndDate', new Date());
         }
     });
+    return false;
 });
 
 //表格初始化
@@ -97,9 +98,8 @@ var TableInit = function () {
         var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
             limit: params.limit,   //页面大小
             offset: params.offset,  //页码
-            Keywords: params.search,  //搜索的字符
-            SearchTitle: $("#SearchTitle").val(),
-            SearchUserId: $("#SearchUserId").val(),
+            SearchTitle: $("#date_start").val(),
+            SearchUserId: $("#date_end").val(),
         };
         return temp;
     };
@@ -112,8 +112,8 @@ var ButtonInit = function () {
 
     oInit.Init = function () {
         //修改按钮事件
-        $("#btn_edit").click(function () {
-
+        $("#btn_detail").click(function () {
+            console.log("查看详情");
             return false;
         });
 
@@ -128,7 +128,7 @@ var ButtonInit = function () {
 //查询按钮事件
 $("#btn_query").click(function () {
     //刷新bootstraptable
-    console.log("refresh");
+    //console.log("refresh");
     $("#tb_ServerException").bootstrapTable('refresh');
     return false;
 });
