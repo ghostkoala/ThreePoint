@@ -251,4 +251,7 @@ Logicore.Web/wwwroot/lib/nth-tabs/README.md
 Logicore.Web/obj/Debug/netcoreapp3.1/Razor/Views/Message/GetMessageDetails.cshtml.g.cs
 Logicore.Web/obj/Debug/netcoreapp3.1/Razor/Views/Admin/DropDownAdminSearch.cshtml.g.cs
 Logicore.Web/obj/Debug/netcoreapp3.1/Razor/Views/Message/ReadMessage.cshtml.g.cs
+<<<<<<< HEAD
 Logicore.Web/obj/Debug/netcoreapp3.1/Razor/Views/ServerException/Index.cshtml.g.cs
+=======
+>>>>>>> 0e32602c9de3b9ee372f328d4c039bcfa7f7de10
