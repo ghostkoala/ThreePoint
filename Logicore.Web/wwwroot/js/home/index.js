@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-05-16 13:57:04
- * @LastEditTime: 2021-07-14 13:51:22
+ * @LastEditTime: 2021-07-16 14:06:39
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Logicore\Logicore.Web\wwwroot\js\home\index.js
@@ -136,6 +136,16 @@ function openEditPasswordModal() {
 };
 
 //打开要读的信息
-function readMessage() {
-
+function readMessage(id, title) {
+    console.log(id);
+    console.log(title);
+    url = "/Message/ReadMessage/" + id;
+    id = "readMessage" + id;
+    nthTabs.addTab({
+        id: id,
+        title: "信息查看 - " + title,
+        url: url,
+        //content: content,
+        active: true,
+    });
 };

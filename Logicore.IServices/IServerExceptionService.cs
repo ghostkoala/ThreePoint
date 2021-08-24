@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Logicore.Core.Enities;
 using Logicore.Core.Enities.ServiceModel;
 using Logicore.Core.Filters;
+using Logicore.Core.ViewModel;
 
 namespace Logicore.IServices
 {
@@ -19,10 +20,17 @@ namespace Logicore.IServices
         Task AddAsync(ServerExceptionEntity entity);
 
         /// <summary>
-        /// 查找信息
+        /// 查找异常信息
         /// </summary>
-        /// <param name="filter"></param>
+        /// <param name="id">id</param>
         /// <returns></returns>
-        Task<PageResult<ServerExceptionEntity>> FindAsync(ServerExceptionFilter filter);
+        Task<ServerExceptionEntity> FindAsync(string id);
+
+        /// <summary>
+        /// 表格查找角色
+        /// </summary>
+        /// <param name="filter">过滤</param>
+        /// <returns></returns>
+        Task<PageResult<ServerExceptionTableViewModel>> GetServerExceptionForTable(ServerExceptionFilter filter);
     }
 }

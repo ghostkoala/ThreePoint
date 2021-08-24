@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 namespace Logicore.Web.Filters
 {
     /// <summary>
-    /// 默认权限
+    /// 默认权限--只要登陆了就有权限
     /// </summary>
     public class NonePermissionAttribute : ActionFilterAttribute { }
 

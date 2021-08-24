@@ -172,6 +172,10 @@ namespace Logicore.Core.SystemConfigurationData
         /// </summary>
         public const string MessageDeleteId = "00053";
 
+        /// <summary>
+        /// 系统错误日志查询
+        /// </summary>
+        public const string ServerExceptionPageId = "00060";
         #endregion
 
 

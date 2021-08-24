@@ -12,6 +12,8 @@ using Logicore.Web.Filters;
 using Logicore.Core.Filters;
 using System;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using System.Linq;
 
 namespace Logicore.Web.Controllers
 {
@@ -21,13 +23,17 @@ namespace Logicore.Web.Controllers
     public class MessageController : BaseController
     {
         private readonly IMessageService _messageService;
+        private readonly IConfiguration _configuration;
+        private readonly IAdminService _adminService;
 
         /// <summary>
         /// ctor
         /// </summary>
-        public MessageController(IMessageService messageService)
+        public MessageController(IMessageService messageService, IConfiguration configuration, IAdminService adminService)
         {
             _messageService = messageService;
+            _configuration = configuration;
+            _adminService = adminService;
         }
 
         /// <summary>
@@ -143,9 +149,16 @@ namespace Logicore.Web.Controllers
             return View(result);
         }
 
+        [NonePermission]
         public async Task<IActionResult> ReadMessage(string id)
         {
-            return View();
+            // var goldList = _configuration.GetValue<string>("GoldList", "").Split(',');
+            // var userId = HttpContext.Session.GetString("Uid");
+            // var admin = await _adminService.FindAsync(userId);
+            // var isSupper = goldList.Any(x => x == admin.LoginName);
+            var message = await _messageService.ReadMessageAsync(id);
+            if (message == null) return Content("没有要阅读的信息");
+            return View(message);
         }
     }
 }

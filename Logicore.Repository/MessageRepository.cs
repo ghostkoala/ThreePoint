@@ -208,5 +208,25 @@ namespace Logicore.Repository
                 .FirstOrDefaultAsync(x => x.Id == id);
             }
         }
+
+        public async Task<MessageReceiverEntity> ReadMessageAsync(string id)
+        {
+            using (var dbContext = _dbContextFactory.CreateDbContext(DbContextType.Write))
+            {
+                var uid = _httpContextAccessor.HttpContext.Session.GetString("Uid");
+                var entity = await dbContext.MessageReceivers.Include(x => x.Message).FirstOrDefaultAsync(x => x.MessageId == id && x.UserId == uid);
+                if (entity != null)
+                {
+                    if (!entity.IsDeleted)
+                    {
+                        entity.IsReaded = true;
+                        entity.ReadDate = DateTime.Now;
+                        dbContext.Update(entity);
+                        await dbContext.SaveChangesAsync();
+                    }
+                }
+                return entity;
+            }
+        }
     }
 }

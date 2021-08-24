@@ -32,18 +32,22 @@ namespace Logicore.Core.Enities.ServiceModel
         /// 总记录数
         /// </summary>
         public int records { set; get; }
+
         /// <summary>
         /// 当前页的所有项
         /// </summary>
         public IList<T> rows { set; get; }
+
         /// <summary>
         /// 当前页
         /// </summary>
         public int page { set; get; } = 0;
+
         /// <summary>
         /// 页大小
         /// </summary>
         public int pagesize { set; get; } = 10;
+
         /// <summary>
         /// 页总数
         /// </summary>

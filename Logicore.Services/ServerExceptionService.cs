@@ -8,6 +8,7 @@ using Logicore.Core.Filters;
 using Logicore.IRepository;
 using Logicore.IServices;
 using Logicore.Core.Extensions;
+using Logicore.Core.ViewModel;
 
 namespace Logicore.Services
 {
@@ -25,12 +26,18 @@ namespace Logicore.Services
         {
             _serverExceptionRepository = serverExceptionRepository;
         }
+
         public async Task AddAsync(ServerExceptionEntity entity)
         {
             await _serverExceptionRepository.AddAsync(entity);
         }
 
-        public async Task<PageResult<ServerExceptionEntity>> FindAsync(ServerExceptionFilter filter)
+        public Task<ServerExceptionEntity> FindAsync(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<PageResult<ServerExceptionTableViewModel>> GetServerExceptionForTable(ServerExceptionFilter filter)
         {
             Expression<Func<ServerExceptionEntity, bool>> exp = null;
             if (filter.StartTime != null)
@@ -40,7 +47,25 @@ namespace Logicore.Services
             if (filter.category != null)
                 exp = exp.And(x => x.errCategory == filter.category);
 
-            return await _serverExceptionRepository.GetAsync(exp, filter);
+            var exceptions = await _serverExceptionRepository.GetAsync(exp, filter);
+
+            PageResult<ServerExceptionTableViewModel> result = new PageResult<ServerExceptionTableViewModel>();
+            result.records = exceptions.records;
+            var rows = new List<ServerExceptionTableViewModel>();
+            foreach (var item in result.rows)
+            {
+                rows.Add(new ServerExceptionTableViewModel()
+                {
+                    Id = item.Id,
+                    Code = item.Code,
+                    Url = item.Url,
+                    Method = item.Method,
+                    ErrMessage = item.ErrMessage,
+                    CreateTime = item.CreateTime
+                });
+            };
+            result.rows = rows;
+            return result;
         }
     }
 }

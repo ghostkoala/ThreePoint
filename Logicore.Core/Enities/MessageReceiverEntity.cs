@@ -32,11 +32,11 @@ namespace Logicore.Core.Enities
         /// 管理员主体
         /// </summary>
         /// <value></value>
-        public virtual AdminEntity Admin { get; set; } = new AdminEntity();
+        public virtual AdminEntity Admin { get; set; }
 
         /// <summary>
         /// 消息主体
         /// </summary>
-        public virtual MessageEntity Message { get; set; } = new MessageEntity();
+        public virtual MessageEntity Message { get; set; }
     }
 }

@@ -80,5 +80,13 @@ namespace Logicore.IRepository
         /// <param name="id">id</param>
         /// <returns></returns>
         Task<MessageEntity> GetMessageDetails(string id);
+
+        /// <summary>
+        /// 读取用户站内信
+        /// </summary>
+        /// <param name="id">id</param>
+        /// <param name="isSupper">超级管理员可读取所有信息</param>
+        /// <returns></returns>
+        Task<MessageReceiverEntity> ReadMessageAsync(string id);
     }
 }

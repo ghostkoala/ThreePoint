@@ -97,9 +97,34 @@ namespace Logicore.Repository.DbContextService
 
                 #endregion
 
-                #region 用户角色关系
+                #region 部门
+
+                var Admindepartment = new DepartmentEntity()
+                {
+                    Id = Guid.NewGuid().ToString("N"),
+                    CreateDateTime = Now,
+                    Name = "管理部门",
+                    FullName = "管理部门",
+                    ParentId = ""
+                };
+
+                var Testepartment = new DepartmentEntity()
+                {
+                    Id = Guid.NewGuid().ToString("N"),
+                    CreateDateTime = Now,
+                    Name = "管理部门 - 测试部门",
+                    FullName = "测试部门",
+                    ParentId = Admindepartment.Id
+                };
+
+                #endregion
+
+
+                #region 用户字段配置
                 admin.Role = superAdminRole;
+                admin.Department = Admindepartment;
                 guest.Role = guestRole;
+                guest.Department = Testepartment;
                 #endregion
 
                 #region 角色菜单权限关系
@@ -130,28 +155,6 @@ namespace Logicore.Repository.DbContextService
                     DataInitedDate = Now,
                     CreateDateTime = Now,
                     IsDeleted = false
-                };
-
-                #endregion
-
-                #region 部门
-
-                var Admindepartment = new DepartmentEntity()
-                {
-                    Id = Guid.NewGuid().ToString("N"),
-                    CreateDateTime = Now,
-                    Name = "管理部门",
-                    FullName = "管理部门",
-                    ParentId = ""
-                };
-
-                var Testepartment = new DepartmentEntity()
-                {
-                    Id = Guid.NewGuid().ToString("N"),
-                    CreateDateTime = Now,
-                    Name = "管理部门 - 测试部门",
-                    FullName = "测试部门",
-                    ParentId = Admindepartment.Id
                 };
 
                 #endregion

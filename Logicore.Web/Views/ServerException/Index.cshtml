@@ -1,0 +1,49 @@
+<link href="~/lib/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" />
+<link href="~/lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker-standalone.css" rel="stylesheet" />
+<link href="~/lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet" />
+<script src="~/lib/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="~/lib/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+<script src="~/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min"></script>
+
+<div class="panel-body" style="padding-bottom:0px;">
+    <div class="panel panel-default">
+        <div class="panel-heading">查询条件</div>
+        <div class="panel-body">
+            <form id="formSearch" class="form-horizontal">
+                <div class="form-group form-inline row" style="margin-top:15px">
+                    <label>选择开始日期：</label>
+                    <!--指定 date标记-->
+                    <div class='input-group date' id='date_start'>
+                        <input type='text' class="form-control" readonly="readonly" />
+                        <span class="input-group-addon">  
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+
+                    <label>选择结束时间：</label>
+                    <!--指定 date标记-->
+                    <div class='input-group date' id='date_end'>
+                        <input type='text' class="form-control" readonly="readonly" />
+                        <span class="input-group-addon">  
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+
+                    <div class="input-group" style="text-align:left;">
+                        <button type="button" id="btn_query" class="btn btn-primary">查询</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="toolbar" class="btn-group">
+        <button id="btn_detail" type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>详细情况
+        </button>
+    </div>
+
+    <table id="tb_ServerException" style="table-layout:fixed;word-break:break-all;"></table>
+</div>
+
+<script src="~/js/ServerException/index.js" asp-append-version="true"></script>
