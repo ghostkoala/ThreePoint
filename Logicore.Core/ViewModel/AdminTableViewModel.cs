@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Logicore.Core.Enities;
 using Logicore.Core.ServerModels;
 
@@ -33,6 +34,8 @@ namespace Logicore.Core.ViewModel
         /// <summary>
         /// 创建日期
         /// </summary>
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "创建时间")]
         public string CreateDateTime { get; set; }
 
         /// <summary>

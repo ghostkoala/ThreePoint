@@ -41,8 +41,10 @@ namespace Logicore.Services
         {
             Expression<Func<ServerExceptionEntity, bool>> exp = x => x.Id != null;
             if (filter.StartTime != null)
+                //exp = exp.And(x => x.CreateTime >= DateTime.Parse(filter.StartTime));
                 exp = exp.And(x => x.CreateTime >= filter.StartTime);
             if (filter.EndTime != null)
+                //exp = exp.And(x => x.CreateTime <= DateTime.Parse(filter.EndTime));
                 exp = exp.And(x => x.CreateTime <= filter.EndTime);
             if (filter.category != null)
                 exp = exp.And(x => x.errCategory == filter.category);
@@ -52,7 +54,7 @@ namespace Logicore.Services
             PageResult<ServerExceptionTableViewModel> result = new PageResult<ServerExceptionTableViewModel>();
             result.records = exceptions.records;
             var rows = new List<ServerExceptionTableViewModel>();
-            foreach (var item in result.rows)
+            foreach (var item in exceptions.rows)
             {
                 rows.Add(new ServerExceptionTableViewModel()
                 {

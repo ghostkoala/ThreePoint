@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-08-17 16:39:35
- * @LastEditTime: 2021-08-24 17:06:16
+ * @LastEditTime: 2021-09-08 16:15:30
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Logicore\Logicore.Web\wwwroot\js\ServerException\index.js
@@ -58,8 +58,8 @@ var TableInit = function () {
     columns.push({ field: 'code', title: '错误代码', align: 'center', valign: 'middle', width: 120 });
     columns.push({ field: 'url', title: 'Url', align: 'center', valign: 'middle', width: 120 });
     columns.push({ field: 'method', title: '类型', align: 'center', valign: 'middle', width: 120 });
-    columns.push({ field: 'errMessage', title: '错误信息', align: 'center', valign: 'middle', width: 120 });
-    columns.push({ field: 'createdatetime', title: '创建时间', align: 'center', valign: 'middle', width: 120 });
+    columns.push({ field: 'errmessage', title: '错误信息', align: 'center', valign: 'middle', width: 120 });
+    columns.push({ field: 'createtime', title: '创建时间', align: 'center', valign: 'middle', width: 120 });
 
     var oTableInit = new Object();
     //初始化Table
@@ -78,7 +78,7 @@ var TableInit = function () {
             pageNumber: 1,                       //初始化加载第一页，默认第一页
             pageSize: 10,                       //每页的记录行数（*）
             pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
-            search: true,                       //是否显示表格搜索
+            search: false,                       //是否显示表格搜索
             strictSearch: true,
             showColumns: true,                  //是否显示所有的列
             showRefresh: true,                  //是否显示刷新按钮
@@ -98,8 +98,8 @@ var TableInit = function () {
         var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
             limit: params.limit,   //页面大小
             offset: params.offset,  //页码
-            SearchTitle: $("#date_start").val(),
-            SearchUserId: $("#date_end").val(),
+            starttime: $("#datestart").val(),
+            endtime: $("#dateend").val(),
         };
         return temp;
     };

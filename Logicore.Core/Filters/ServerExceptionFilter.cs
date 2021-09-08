@@ -11,16 +11,16 @@ namespace Logicore.Core.Filters
         /// <summary>
         /// 开始查找时间
         /// </summary>
-        public DateTime? StartTime;
+        public DateTime? StartTime { get; set; }
 
         /// <summary>
         /// 结束查找时间
         /// </summary>
-        public DateTime? EndTime;
+        public DateTime? EndTime { get; set; }
 
         /// <summary>
         /// 错误类型
         /// </summary>
-        public ErrCategory? category;
+        public ErrCategory? category { get; set; }
     }
 }
