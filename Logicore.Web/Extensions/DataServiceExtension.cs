@@ -31,6 +31,7 @@ namespace Logicore.Web.Extensions
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddScoped<IServerExceptionRepository, ServerExceptionRepository>();
+            services.AddScoped<ISystemConfigRepository, SystemConfigRepository>();
 
             services.AddScoped<IMenuService, MenuService>();
             services.AddScoped<IAdminService, AdminService>();
@@ -38,6 +39,7 @@ namespace Logicore.Web.Extensions
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IDepartmentService, DepartmentService>();
             services.AddScoped<IServerExceptionService, ServerExceptionService>();
+            services.AddScoped<ISystemConfigService, SystemConfigService>();
             #endregion
             return services;
         }

@@ -176,6 +176,16 @@ namespace Logicore.Core.SystemConfigurationData
         /// 系统错误日志查询
         /// </summary>
         public const string ServerExceptionPageId = "00060";
+
+        /// <summary>
+        /// 系统信息配置
+        /// </summary>
+        public const string ServerConfigPageId = "00061";
+
+        /// <summary>
+        /// 系统信息配置
+        /// </summary>
+        public const string ServerConfigEditId = "00062";
         #endregion
 
 

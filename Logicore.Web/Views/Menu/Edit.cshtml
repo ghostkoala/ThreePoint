@@ -1,7 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Rendering
 @model Logicore.Core.ServerModels.MenuDto
 @{
-
     Layout = null;
 }
 
@@ -24,17 +23,11 @@
                     </div>
                     <div class="ibox-content">
                         @using (Html.BeginForm(FormMethod.Post, new
-
                         {
-
                             @class = "form-horizontal",
-
                             name = "editform",
-
                             id = "editform"
-
                         }))
-
                         {
                             @Html.HiddenFor(m => m.Id)
                             @Html.HiddenFor(m => m.ParentId)
@@ -83,7 +76,6 @@
                                     @Html.ValidationMessageFor(m => m.Type)
                                 </div>
                             </div>
-
                         }
                     </div>
                 </div>

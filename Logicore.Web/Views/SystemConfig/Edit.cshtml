@@ -1,0 +1,32 @@
+@using Microsoft.AspNetCore.Mvc.Rendering
+@model Logicore.Core.ServerModels.SystemConfigDto
+<div class="form-group"></div>
+@using (Html.BeginForm(FormMethod.Post, new
+{
+    @onsubmit = "return CheckValid()",
+    @class = "form-horizontal",
+    name = "editform",
+    id = "editform"
+}))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.SystemName, new { @class = "col-md-2 control-label" })
+        <div class="col-sm-8">
+            @Html.TextBoxFor(m => m.SystemName, new { @class = "form-control", placeholder = "请输入系统名称" })
+            <span style="color: red;">@Html.ValidationMessageFor(m => m.SystemName)</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10 btn-group">
+            <button type="reset" class="btn btn-default">重 置</button>
+            <button type="submit" class="btn btn-default">保 存</button>
+        </div>
+    </div>
+}
+
+<script>
+    //表单验证
+    function CheckValid() {
+        return true;
+    };
+</script>
