@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Logicore.Core.Quartz
 {
+    /// <summary>
+    /// 任务调度中心
+    /// </summary>
     public class ScheduleCenter
     {
         private readonly ILogger<ScheduleCenter> _logger;
