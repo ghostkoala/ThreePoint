@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TB.AspNetCore.Data.Entity.ScheduleInfo>
+﻿@model  IEnumerable<Logicore.Core.Enities.ScheduleInfoEntity>
 
 @{
     ViewData["Title"] = "Job列表";
@@ -50,10 +50,10 @@
                 @Html.DisplayNameFor(model => model.DataStatus)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CreateAuthr)
+                @Html.DisplayNameFor(model => model.CreateUserId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CreateTime)
+                @Html.DisplayNameFor(model => model.CreateDateTime)
             </th>
             <th></th>
         </tr>
@@ -101,10 +101,10 @@
                 @Html.DisplayFor(modelItem => item.DataStatus)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CreateAuthr)
+                @Html.DisplayFor(modelItem => item.CreateUserId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CreateTime)
+                @Html.DisplayFor(modelItem => item.CreateDateTime)
             </td>
             <td>
                 <a asp-action="StartTask" asp-route-id="@item.Id">启动任务</a> |

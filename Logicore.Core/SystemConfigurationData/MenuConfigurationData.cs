@@ -19,9 +19,15 @@ namespace Logicore.Core.SystemConfigurationData
         public static (string Id, string Name) Logs = (LogsId, "日志查看");
 
         /// <summary>
+        /// 任务管理模块
+        /// </summary>
+        public static (string Id, string Name) Schedule = (LogsId, "任务管理");
+
+        /// <summary>
         /// 示例页面模块
         /// </summary>
         public static (string Id, string Name) Pages = (PagesId, "示例页面");
+
 
         #endregion
 
@@ -38,9 +44,16 @@ namespace Logicore.Core.SystemConfigurationData
         public const string LogsId = "00002";
 
         /// <summary>
+        /// 任务管理模块Id
+        /// </summary>
+        public const string ScheduleId = "00003";
+
+        /// <summary>
         /// 示例页面模块Id
         /// </summary>
-        public const string PagesId = "00003";
+        public const string PagesId = "00004";
+
+
 
         /// <summary>
         /// 菜单管理页面Id
@@ -186,6 +199,32 @@ namespace Logicore.Core.SystemConfigurationData
         /// 系统信息配置
         /// </summary>
         public const string ServerConfigEditId = "00062";
+
+        /// <summary>
+        /// 系统任务创建
+        /// </summary>
+        public const string ScheduleCreateId = "00070";
+
+        /// <summary>
+        /// 系统任务删除
+        /// </summary>
+        public const string ScheduleDeleteId = "00071";
+
+        /// <summary>
+        /// 系统任务服务开始
+        /// </summary>
+        public const string ScheduleTaskStartId = "00072";
+
+        /// <summary>
+        /// 系统任务服务停止
+        /// </summary>
+        public const string ScheduleTaskStopId = "00073";
+
+        /// <summary>
+        /// 系统任务服务删除
+        /// </summary>
+        public const string ScheduleTaskDeleteId = "00074";
+
         #endregion
 
 

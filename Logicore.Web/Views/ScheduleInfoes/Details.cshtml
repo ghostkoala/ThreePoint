@@ -1,4 +1,4 @@
-﻿@model TB.AspNetCore.Data.Entity.ScheduleInfo
+﻿@model Logicore.Core.Enities.ScheduleInfoEntity
 
 @{
     ViewData["Title"] = "Details";
@@ -89,16 +89,16 @@
             @Html.DisplayFor(model => model.DataStatus)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.CreateAuthr)
+            @Html.DisplayNameFor(model => model.CreateUserId)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.CreateAuthr)
+            @Html.DisplayFor(model => model.CreateUserId)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.CreateTime)
+            @Html.DisplayNameFor(model => model.CreateDateTime)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.CreateTime)
+            @Html.DisplayFor(model => model.CreateDateTime)
         </dd>
     </dl>
 </div>

@@ -1,4 +1,4 @@
-﻿@model TB.AspNetCore.Data.Entity.ScheduleInfo
+﻿@model Logicore.Core.Enities.ScheduleInfoEntity
 
 @{
     ViewData["Title"] = "Edit";
@@ -79,14 +79,14 @@
                 <span asp-validation-for="DataStatus" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CreateAuthr" class="control-label"></label>
-                <input asp-for="CreateAuthr" class="form-control" />
-                <span asp-validation-for="CreateAuthr" class="text-danger"></span>
+                <label asp-for="CreateUserId" class="control-label"></label>
+                <input asp-for="CreateUserId" class="form-control" />
+                <span asp-validation-for="CreateUserId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CreateTime" class="control-label"></label>
-                <input asp-for="CreateTime" class="form-control" />
-                <span asp-validation-for="CreateTime" class="text-danger"></span>
+                <label asp-for="CreateDateTime" class="control-label"></label>
+                <input asp-for="CreateDateTime" class="form-control" />
+                <span asp-validation-for="CreateDateTime" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />

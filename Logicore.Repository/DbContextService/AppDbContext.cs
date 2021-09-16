@@ -121,6 +121,11 @@ namespace Logicore.Repository.DbContextService
         /// </summary>
         public DbSet<ServerExceptionEntity> serverExceptions { get; set; }
 
+        /// <summary>
+        /// 任务
+        /// </summary>
+        /// <value></value>
+        public DbSet<ScheduleInfoEntity> scheduleInfoEntities { get; set; }
         #endregion
 
     }
