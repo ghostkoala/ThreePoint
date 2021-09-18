@@ -27,7 +27,7 @@ namespace Logicore.Web.Controllers
         /// 首页
         /// </summary>
         /// <returns></returns>
-        [Menu(Id = Menu.ScheduleId, ParentId = Menu.ScheduleId, Name = "任务管理", Order = "0")]
+        [Menu(Id = Menu.SchedulePageId, ParentId = Menu.ScheduleId, Name = "任务管理", Order = "0")]
         public async Task<IActionResult> Index()
         {
             var info = _scheduleInfoService.GetAllAsync();
@@ -38,7 +38,6 @@ namespace Logicore.Web.Controllers
         /// 创建任务页面
         /// </summary>
         /// <returns></returns>
-        [ParentPermission(null, "ScheduleInfoes", "Index")]
         public IActionResult Create()
         {
             return View();
@@ -51,13 +50,16 @@ namespace Logicore.Web.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Menu(Id = Menu.ScheduleId, ParentId = Menu.ScheduleId, Name = "任务管理", Order = "1")]
-        public IActionResult Create([Bind("Id,JobGroup,JobName,RunStatus,CromExpress,StarRunTime,EndRunTime,NextRunTime,Token,AppId,ServiceCode,InterfaceCode,TaskDescription,DataStatus,CreateAuthr,CreateTime")] ScheduleInfoEntity scheduleInfo)
+        [Menu(Id = Menu.SchedulePageId, ParentId = Menu.SchedulePageId, Name = "任务管理", Order = "1")]
+        public async Task<IActionResult> Create([Bind("Id,JobGroup,JobName,RunStatus,CromExpress,StarRunTime,EndRunTime,NextRunTime,Token,AppId,ServiceCode,InterfaceCode,TaskDescription,DataStatus,CreateAuthr,CreateTime")] ScheduleInfoEntity scheduleInfo)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(scheduleInfo);
-                _context.Save();
+                await _scheduleInfoService.CreateAsync(scheduleInfo);
+                //如任务需要马上开启，将开启任务
+                if (scheduleInfo.StarRunTime != null && scheduleInfo.StarRunTime < System.DateTime.Now)
+                    await _scheduleCenter.AddJobAsync(scheduleInfo.JobName, scheduleInfo.JobGroup, null, scheduleInfo.CromExpress, null, scheduleInfo.StarRunTime, scheduleInfo.EndRunTime, scheduleInfo.TaskDescription);
+
                 return RedirectToAction(nameof(Index));
             }
             return View(scheduleInfo);
@@ -67,18 +69,19 @@ namespace Logicore.Web.Controllers
         /// 开始任务操作
         /// </summary>
         /// <param name="id">id</param>
-        [Menu(Id = Menu.ScheduleId, ParentId = Menu.ScheduleTaskStartId, Name = "任务开始", Order = "2")]
-        public void StartTask(int? id)
+        [Menu(Id = Menu.ScheduleTaskStartId, ParentId = Menu.SchedulePageId, Name = "任务开始", Order = "2")]
+        public async Task<IActionResult> StartTask(string id)
         {
-            var info = ggb_OfflinebetaContext.ScheduleInfo.SingleOrDefault(t => t.Id == id);
-            _context.AddSchedule(info);
+            var info = await _scheduleInfoService.FindAsync(id);
+            var status = await _scheduleCenter.CheckStatusAsync(info.JobName, info.JobGroup);)
+            return Ok();
         }
 
         /// <summary>
         /// 关闭任务操作
         /// </summary>
         /// <param name="id">id</param>
-        [Menu(Id = Menu.ScheduleId, ParentId = Menu.ScheduleTaskStopId, Name = "任务管理", Order = "3")]
+        [Menu(Id = Menu.ScheduleTaskStopId, ParentId = Menu.SchedulePageId, Name = "任务管理", Order = "3")]
         public void StopTask(int? id)
         {
             var info = ggb_OfflinebetaContext.ScheduleInfo.SingleOrDefault(t => t.Id == id);
@@ -86,20 +89,20 @@ namespace Logicore.Web.Controllers
         }
 
         /// <summary>
-        /// 删除系统任务服务
+        /// 系统任务详情
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [Menu(Id = Menu.ScheduleId, ParentId = Menu.ScheduleTaskDeleteId, Name = "任务管理", Order = "4")]
-        public async Task<IActionResult> DeleteTask(int? id)
+        [Menu(Id = Menu.ScheduleDetailId, ParentId = Menu.SchedulePageId, Name = "任务管理", Order = "4")]
+        [ParentPermissionAttribute(null, "ScheduleInfoes", "Index")]
+        public async Task<IActionResult> Details(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var scheduleInfo = await ggb_OfflinebetaContext.ScheduleInfo
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var scheduleInfo = await _scheduleInfoService.FindAsync(id);
             if (scheduleInfo == null)
             {
                 return NotFound();
@@ -115,12 +118,10 @@ namespace Logicore.Web.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Menu(Id = Menu.ScheduleId, ParentId = Menu.ScheduleDeleteId, Name = "任务管理", Order = "5")]
-        public async Task<IActionResult> Delete(int id)
+        [Menu(Id = Menu.ScheduleDeleteId, ParentId = Menu.SchedulePageId, Name = "任务管理", Order = "5")]
+        public async Task<IActionResult> Delete(string id)
         {
-            var scheduleInfo = await ggb_OfflinebetaContext.ScheduleInfo.FindAsync(id);
-            ggb_OfflinebetaContext.ScheduleInfo.Remove(scheduleInfo);
-            await ggb_OfflinebetaContext.SaveChangesAsync();
+            var scheduleInfo = await _scheduleInfoService.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
         }
     }

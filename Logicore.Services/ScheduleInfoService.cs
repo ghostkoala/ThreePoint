@@ -29,9 +29,9 @@ namespace Logicore.Services
             return _scheduleInfoRepository.GetAllAsync();
         }
 
-        public Task<ScheduleInfoEntity> GetAsync(string id)
+        public Task<ScheduleInfoEntity> FindAsync(string id)
         {
-            return _scheduleInfoRepository.GetAsync(id);
+            return _scheduleInfoRepository.FindAsync(id);
         }
     }
 }

@@ -34,6 +34,6 @@ namespace Logicore.IRepository
         /// </summary>
         /// <param name="id">ID</param>
         /// <returns></returns>
-        Task<ScheduleInfoEntity> GetAsync(string id);
+        Task<ScheduleInfoEntity> FindAsync(string id);
     }
 }

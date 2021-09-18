@@ -58,7 +58,7 @@ namespace Logicore.Repository
             }
         }
 
-        public Task<ScheduleInfoEntity> GetAsync(string id)
+        public Task<ScheduleInfoEntity> FindAsync(string id)
         {
             using (var dbContext = _dbContextFactory.CreateDbContext(DbContextType.Read))
             {

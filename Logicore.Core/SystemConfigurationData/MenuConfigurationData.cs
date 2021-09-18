@@ -206,24 +206,29 @@ namespace Logicore.Core.SystemConfigurationData
         public const string ScheduleCreateId = "00070";
 
         /// <summary>
+        /// 系统任务页
+        /// </summary>
+        public const string SchedulePageId = "00071";
+
+        /// <summary>
         /// 系统任务删除
         /// </summary>
-        public const string ScheduleDeleteId = "00071";
+        public const string ScheduleDeleteId = "00072";
+
+        /// <summary>
+        /// 系统任务详情
+        /// </summary>
+        public const string ScheduleDetailId = "00073";
 
         /// <summary>
         /// 系统任务服务开始
         /// </summary>
-        public const string ScheduleTaskStartId = "00072";
+        public const string ScheduleTaskStartId = "00074";
 
         /// <summary>
         /// 系统任务服务停止
         /// </summary>
-        public const string ScheduleTaskStopId = "00073";
-
-        /// <summary>
-        /// 系统任务服务删除
-        /// </summary>
-        public const string ScheduleTaskDeleteId = "00074";
+        public const string ScheduleTaskStopId = "00075";
 
         #endregion
 

@@ -176,7 +176,6 @@ namespace Logicore.Core.Quartz
                     result.ResultCode = -1;
                     result.ResultMsg = "任务不存在";
                 }
-
             }
             catch (Exception ex)
             {
@@ -248,6 +247,34 @@ namespace Logicore.Core.Quartz
                     result.ResultMsg = "任务不存在";
                 }
 
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, nameof(ResumeJobAsync));
+                result.ResultCode = -4;
+                result.ResultMsg = ex.ToString();
+            }
+            return result;
+        }
+
+        public async Task<ScheduleResult> CheckStatusAsync(string jobName, string jobGroup)
+        {
+            ScheduleResult result = new ScheduleResult();
+            try
+            {
+                JobKey jobKey = new JobKey(jobName, jobGroup);
+                if (await Scheduler.CheckExists(jobKey))
+                {
+                    var status = Scheduler.GetJobDetail(jobKey).Status.ToString();
+                    var statusCode = ((int)Scheduler.GetJobDetail(jobKey).Status);
+                    result.ResultCode = statusCode;
+                    result.ResultMsg = status;
+                }
+                else
+                {
+                    result.ResultCode = -1;
+                    result.ResultMsg = "任务不存在";
+                }
             }
             catch (Exception ex)
             {
