@@ -6,6 +6,8 @@ using Logicore.Core.Quartz;
 using Logicore.Web.Attributes;
 using Logicore.Core.SystemConfigurationData;
 using Logicore.Web.Filters;
+using Logicore.Core.Extensions;
+using Logicore.Core.Enums;
 
 namespace Logicore.Web.Controllers
 {
@@ -72,8 +74,9 @@ namespace Logicore.Web.Controllers
         [Menu(Id = Menu.ScheduleTaskStartId, ParentId = Menu.SchedulePageId, Name = "任务开始", Order = "2")]
         public async Task<IActionResult> StartTask(string id)
         {
+            if (id.IsBlank()) return NotFound();
             var info = await _scheduleInfoService.FindAsync(id);
-            var status = await _scheduleCenter.CheckStatusAsync(info.JobName, info.JobGroup);)
+            var status = await _scheduleCenter.CheckStatusAsync(info.JobName, info.JobGroup);
             return Ok();
         }
 
@@ -82,10 +85,20 @@ namespace Logicore.Web.Controllers
         /// </summary>
         /// <param name="id">id</param>
         [Menu(Id = Menu.ScheduleTaskStopId, ParentId = Menu.SchedulePageId, Name = "任务管理", Order = "3")]
-        public void StopTask(int? id)
+        public async Task<IActionResult> StopTask(string id)
         {
-            var info = ggb_OfflinebetaContext.ScheduleInfo.SingleOrDefault(t => t.Id == id);
-            _context.UpdateScheduleStatus(info);
+            if (id.IsBlank()) return NotFound();
+            var info = await _scheduleInfoService.FindAsync(id);
+            var ok = await _scheduleCenter.StopJobAsync(info.JobName, info.JobGroup);
+            if(ok==null)
+            {
+                await _scheduleInfoService.UpdataStatus(id, ((int)ScheduleStatus.Canceled));
+                return Ok();
+            }
+            else
+            {
+                return Content("停止任务失败！");
+            }
         }
 
         /// <summary>
@@ -97,7 +110,7 @@ namespace Logicore.Web.Controllers
         [ParentPermissionAttribute(null, "ScheduleInfoes", "Index")]
         public async Task<IActionResult> Details(string id)
         {
-            if (id == null)
+            if (id.IsBlank())
             {
                 return NotFound();
             }
@@ -121,8 +134,12 @@ namespace Logicore.Web.Controllers
         [Menu(Id = Menu.ScheduleDeleteId, ParentId = Menu.SchedulePageId, Name = "任务管理", Order = "5")]
         public async Task<IActionResult> Delete(string id)
         {
+            var entity = await _scheduleInfoService.FindAsync(id);
+            if (entity == null) return NotFound();
             var scheduleInfo = await _scheduleInfoService.DeleteAsync(id);
-            return RedirectToAction(nameof(Index));
+            if (!scheduleInfo) return Content("数据删除失败，请重试");
+            await _scheduleCenter.DeleteJobAsync(entity.JobName, entity.JobGroup);
+            return Content("删除成功！");
         }
     }
 }

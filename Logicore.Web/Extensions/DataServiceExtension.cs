@@ -5,6 +5,7 @@ using Logicore.Repository.DbContextService;
 using Logicore.Services;
 using Logicore.Web.Servers;
 using Microsoft.Extensions.DependencyInjection;
+using Quartz;
 
 namespace Logicore.Web.Extensions
 {
@@ -23,6 +24,7 @@ namespace Logicore.Web.Extensions
             services.AddScoped<IDatabaseInit, DatabaseInit>();
             services.AddScoped<IDbContextFactory, DbContextFactory>();
             services.AddScoped<IServiceFactory, ServiceFactory>();
+            services.AddScoped<IScheduler, SchedulerBuilder()>();            
 
             services.AddScoped<IMenuRepository, MenuRepository>();
             services.AddScoped<IAdminRepository, AdminRepository>();
@@ -32,6 +34,7 @@ namespace Logicore.Web.Extensions
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddScoped<IServerExceptionRepository, ServerExceptionRepository>();
             services.AddScoped<ISystemConfigRepository, SystemConfigRepository>();
+            services.AddScoped<IScheduleInfoRepository, ScheduleInfoRepository>();
 
             services.AddScoped<IMenuService, MenuService>();
             services.AddScoped<IAdminService, AdminService>();
@@ -40,6 +43,7 @@ namespace Logicore.Web.Extensions
             services.AddScoped<IDepartmentService, DepartmentService>();
             services.AddScoped<IServerExceptionService, ServerExceptionService>();
             services.AddScoped<ISystemConfigService, SystemConfigService>();
+            services.AddScoped<IScheduleInfoService, ScheduleInfoService>();
             #endregion
             return services;
         }

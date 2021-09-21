@@ -29,4 +29,3 @@ namespace Logicore.Core.Enums
         Faulted = 7
     }
 }
-}

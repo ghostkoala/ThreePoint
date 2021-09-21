@@ -35,5 +35,13 @@ namespace Logicore.IRepository
         /// <param name="id">ID</param>
         /// <returns></returns>
         Task<ScheduleInfoEntity> FindAsync(string id);
+
+        /// <summary>
+        /// 更新任务状态
+        /// </summary>
+        /// <param name="id">Id</param>
+        /// <param name="status">状态</param>
+        /// <returns></returns>
+        Task<bool> UpdataStatusAsync(string id, int status);
     }
 }
