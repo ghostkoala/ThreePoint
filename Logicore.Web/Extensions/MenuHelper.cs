@@ -22,7 +22,8 @@ namespace Logicore.Web.Extensions
             {
                 new MenuDto{Id = Menu.System.Id,Name = Menu.System.Name,Icon = "glyphicon glyphicon-cog"},
                 new MenuDto{Id = Menu.Logs.Id,Name = Menu.Logs.Name,Icon = "glyphicon glyphicon-menu-hamburger"},
-                new MenuDto{Id = Menu.Pages.Id,Name = Menu.Pages.Name,Icon = "glyphicon glyphicon-file"}
+                new MenuDto{Id = Menu.Pages.Id,Name = Menu.Pages.Name,Icon = "glyphicon glyphicon-file"},
+                new MenuDto{Id = Menu.Schedule.Id,Name = Menu.Schedule.Name,Icon = "glyphicon glyphicon-tasks"}
             };
 
             //获取所有的控制器

@@ -11,10 +11,11 @@ namespace Logicore.Core.Quartz
     /// <summary>
     /// 任务调度中心
     /// </summary>
-    public class ScheduleCenter
+    public class ScheduleCenter : IScheduleCenter
     {
         private readonly ILogger<ScheduleCenter> _logger;
         private readonly object Locker = new object();
+
         /// <summary>
         /// 任务计划
         /// </summary>
@@ -257,6 +258,12 @@ namespace Logicore.Core.Quartz
             return result;
         }
 
+        /// <summary>
+        /// 查看任务状态
+        /// </summary>
+        /// <param name="jobName">任务名称</param>
+        /// <param name="jobGroup">任务组</param>
+        /// <returns></returns>
         public async Task<ScheduleResult> CheckStatusAsync(string jobName, string jobGroup)
         {
             ScheduleResult result = new ScheduleResult();

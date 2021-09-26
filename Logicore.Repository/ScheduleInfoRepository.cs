@@ -65,5 +65,18 @@ namespace Logicore.Repository
                 return dbContext.scheduleInfoEntities.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
             }
         }
+
+        public async Task<bool> UpdataStatusAsync(string id, int status)
+        {
+            using (var dbContext = _dbContextFactory.CreateDbContext(DbContextType.Write))
+            {
+                var entity = await dbContext.scheduleInfoEntities.FirstOrDefaultAsync(x => x.Id == id);
+                if (entity == null) throw new ServerException("无此任务，无法刷新状态！", 404);
+                entity.RunStatus = status;
+                dbContext.scheduleInfoEntities.Update(entity);
+                var ok = await dbContext.SaveChangesAsync();
+                return ok > 0 ? true : false;
+            }
+        }
     }
 }

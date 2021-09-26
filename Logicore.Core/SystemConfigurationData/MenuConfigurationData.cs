@@ -21,7 +21,7 @@ namespace Logicore.Core.SystemConfigurationData
         /// <summary>
         /// 任务管理模块
         /// </summary>
-        public static (string Id, string Name) Schedule = (LogsId, "任务管理");
+        public static (string Id, string Name) Schedule = (ScheduleId, "任务管理");
 
         /// <summary>
         /// 示例页面模块

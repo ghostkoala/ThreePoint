@@ -14,24 +14,29 @@ namespace Logicore.Services
         {
             _scheduleInfoRepository = scheduleInfoRepository;
         }
-        public Task<bool> CreateAsync(ScheduleInfoEntity dto)
+        public async Task<bool> CreateAsync(ScheduleInfoEntity dto)
         {
-            return _scheduleInfoRepository.CreateAsync(dto);
+            return await _scheduleInfoRepository.CreateAsync(dto);
         }
 
-        public Task<bool> DeleteAsync(string id)
+        public async Task<bool> DeleteAsync(string id)
         {
-            return _scheduleInfoRepository.DeleteAsync(id);
+            return await _scheduleInfoRepository.DeleteAsync(id);
         }
 
-        public Task<List<ScheduleInfoEntity>> GetAllAsync()
+        public async  Task<List<ScheduleInfoEntity>> GetAllAsync()
         {
-            return _scheduleInfoRepository.GetAllAsync();
+            return await _scheduleInfoRepository.GetAllAsync();
         }
 
-        public Task<ScheduleInfoEntity> FindAsync(string id)
+        public async Task<ScheduleInfoEntity> FindAsync(string id)
         {
-            return _scheduleInfoRepository.FindAsync(id);
+            return await _scheduleInfoRepository.FindAsync(id);
+        }
+
+        public async Task<bool> UpdataStatus(string id, int status)
+        {
+            return await _scheduleInfoRepository.UpdataStatusAsync(id, status);
         }
     }
 }
