@@ -1,6 +1,4 @@
 *.dll
-<<<<<<< HEAD
-<<<<<<< HEAD
 *.cshtml.g.cs
 .vscode/
 Logicore.Core/bin/
@@ -20,9 +18,6 @@ Logicore.Web/bin/
 Logicore.Web/obj/
 Logicore.WebCore/obj/
 Logicore.WebCore/bin/
-=======
-=======
->>>>>>> 3841e406e351cc8103ad5b01e6d5a9592d3a2de6
 *.g.cs
 *.AssemblyAttributes.cs
 *.pdb
@@ -52,7 +47,3 @@ Logicore.WebCore/bin/
 *.deps.json
 Logicore.Web/bin/
 Logicore.Web/obj/Debug/
-<<<<<<< HEAD
->>>>>>> 3841e406e351cc8103ad5b01e6d5a9592d3a2de6
-=======
->>>>>>> 3841e406e351cc8103ad5b01e6d5a9592d3a2de6

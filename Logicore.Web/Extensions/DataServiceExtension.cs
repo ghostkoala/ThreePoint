@@ -6,7 +6,6 @@ using Logicore.Repository.DbContextService;
 using Logicore.Services;
 using Logicore.Web.Servers;
 using Microsoft.Extensions.DependencyInjection;
-using Quartz;
 
 namespace Logicore.Web.Extensions
 {

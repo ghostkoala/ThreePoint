@@ -171,6 +171,8 @@ namespace Logicore.Core.Quartz
                 if (await Scheduler.CheckExists(jobKey))
                 {
                     await Scheduler.PauseJob(new JobKey(jobName, jobGroup));
+                    result.ResultCode = 200;
+                    result.ResultMsg = "任务已暂停";
                 }
                 else
                 {

@@ -89,12 +89,12 @@ namespace Logicore.Web.Controllers
         {
             var entity = await _scheduleInfoService.FindAsync(id);
             if (entity == null) return NotFound();
-            var result = _scheduleCenter.StopJobAsync(entity.JobName, entity.JobGroup);
+            var result = await _scheduleCenter.StopJobAsync(entity.JobName, entity.JobGroup);
 
             if (id.IsBlank()) return NotFound();
             var info = await _scheduleInfoService.FindAsync(id);
-            var ok = await _scheduleCenter.StopJobAsync(info.JobName, info.JobGroup);
-            if (ok == null)
+            if (info == null) return NotFound();
+            if (result.ResultCode == 200)
             {
                 await _scheduleInfoService.UpdataStatus(id, ((int)ScheduleStatus.Canceled));
                 return Ok();
