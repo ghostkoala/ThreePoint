@@ -1,0 +1,91 @@
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@model ThreePoint.Core.ServerModels.MenuDto
+@{
+    Layout = null;
+}
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button data-dismiss="modal" class="close">&times;</button>
+            <h3 class="modal-title">修改菜单</h3>
+        </div>
+        <div class="modal-body">
+            <div class="wrapper wrapper-content">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>编辑菜单</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        @using (Html.BeginForm(FormMethod.Post, new
+                        {
+                            @class = "form-horizontal",
+                            name = "editform",
+                            id = "editform"
+                        }))
+                        {
+                            @Html.HiddenFor(m => m.Id)
+                            @Html.HiddenFor(m => m.ParentId)
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">@Html.LabelFor(m => m.Name)：</label>
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "菜单名称" })
+                                    @Html.ValidationMessageFor(m => m.Name)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">@Html.LabelFor(m => m.Url)：</label>
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(m => m.Url, new { @class = "form-control", placeholder = "URL地址" })
+                                    @Html.ValidationMessageFor(m => m.Url)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">@Html.LabelFor(m => m.Order)：</label>
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(m => m.Order, new { @class = "form-control", placeholder = "排序" })
+                                    @Html.ValidationMessageFor(m => m.Order)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">@Html.LabelFor(m => m.Icon)：</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(m => m.Icon, new { @class = "form-control", placeholder =
+                                    "glyphicon glyphicon-th-large" })
+                                        <div class="input-group-btn">
+                                            <button id="btn_selectIcons"
+                                            class="btn btn-default glyphicon glyphicon-new-window"></button>
+                                        </div>
+                                        @Html.ValidationMessageFor(m => m.Icon)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">@Html.LabelFor(m => m.Type)：</label>
+                                <div class="col-sm-8">
+                                    @Html.DropDownListFor(x => x.Type, ViewBag.TypeList as List<SelectListItem>, "请选择", new
+                                {
+                                @class = "form-control"
+                                })
+                                    @Html.ValidationMessageFor(m => m.Type)
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-sm" data-dismiss="modal">关闭</button>
+            <button id="submit" class="btn btn-sm btn-success" data-Url="/menu/edit" type="submit">提交</button>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/menu/addoredit.js" asp-append-version="true"></script>

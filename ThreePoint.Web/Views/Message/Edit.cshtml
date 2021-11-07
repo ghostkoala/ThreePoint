@@ -1,0 +1,57 @@
+@using Microsoft.AspNetCore.Mvc.Rendering
+@model ThreePoint.Core.ServerModels.MessageDto
+<div class="form-group"></div>
+@using (Html.BeginForm(FormMethod.Post, new
+{
+    @onsubmit = "return CheckValid()",
+    @class = "form-horizontal",
+    name = "editform",
+    id = "editform"
+}))
+{
+    @Html.HiddenFor(x=>x.Id)
+    <div class="form-group">
+        @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })
+        <div class="col-sm-8">
+            @Html.TextBoxFor(m => m.Title, new { @class = "form-control", placeholder = "请输入标题" })
+            <span style="color: red;">@Html.ValidationMessageFor(m => m.Title)</span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Contents, new { @class = "col-md-2 control-label" })
+        <div class="col-sm-8">
+            @Html.TextAreaFor(m => m.Contents, new {@style="height:300px", @class = "form-control", placeholder = "请输入内容" })
+            <span style="color: red;">@Html.ValidationMessageFor(m => m.Contents)</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10 btn-group">
+            <button type="reset" class="btn btn-default">重 置</button>
+            <button type="submit" class="btn btn-default">保 存</button>
+        </div>
+    </div>
+}
+
+<script>
+    //页面加载事件
+    $(document).ready(function () {
+        console.log("开始加载");
+        $("#ReceiverIds").load("/Admin/DropDownAdminSearch", { model: 2 });
+    });
+
+    $("select#IsToAll").change(function (obj) {
+        var hide = $(this).val();//获取点击当前option的value值
+        console.log(hide);
+        if (hide == "false") {
+            $("#ReceiverDiv").show();
+        }
+        else {
+            $("#ReceiverDiv").hide();
+        }
+    });
+
+    //表单验证
+    function CheckValid() {
+        return true;
+    };
+</script>

@@ -1,0 +1,20 @@
+@model ThreePoint.Core.ViewModel.ReceiverMessageViewModel
+
+<div></div>
+<div class="container-fluid" style="font-size: large;">
+    <p class="bg-primary" style="font-size: medium;">标题：@Model.Title</p>
+    <p class="bg-success" style="font-size: medium;">内容：@Model.Contents</p>
+    <p class="bg-info" style="font-size: medium;">
+        状态：<br />
+        是否已读：@if (Model.IsReaded)
+        {
+            <text>是</text>
+        }
+        else
+        {
+            <text>否</text>
+        }<br />
+        首次阅读时间：@Model.FirstReadDate<br />
+        发送时间：@Model.CreateDateTime
+    </p>
+</div>

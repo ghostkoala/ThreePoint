@@ -1,0 +1,29 @@
+@model ThreePoint.Core.ViewModel.MessageQueryViewModel
+<div></div>
+<div class="container-fluid">
+    <p class="bg-primary" style="font-size: medium;">标题：@Model.Title</p>
+    <p class="bg-success" style="font-size: medium;">内容：@Model.Contents</p>
+    <p class="bg-info" style="font-size: medium;">详细情况：<br />
+        接收人数：@Model.Total<br />
+        阅读人数：@Model.ReadedNumber<br />
+        创建时间：@Model.CreateDateTime<br />
+        @if (Model.Details.Count > 0)
+        {
+            foreach (var item in Model.Details)
+            {
+                if (item.IsReaded)
+                {
+                    <text>阅读者：@item.UserName   已于 @item.ReadDate 读取此信息 </text><br />
+                }
+                else
+                {
+                    <text>阅读者：@item.UserName  并没读取此信息 </text><br />
+                }
+            }
+        }
+        else
+        {
+            @Html.Label("无人阅读者")
+        }
+    </p>
+</div>

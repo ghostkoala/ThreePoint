@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>ThreePoint.Core</AssemblyName>
+    <RootNamespace>ThreePoint.Core</RootNamespace>
+    <UserSecretsId>05b8b8fb-f71e-4e47-b5f5-9448b2cd3ac2</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="microsoft.aspnetcore.staticfiles" Version="2.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.1" />
+    <PackageReference Include="Quartz" Version="3.3.3" />
+  </ItemGroup>
+</Project>

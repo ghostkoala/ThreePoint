@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\ThreePoint.Core\ThreePoint.Core.csproj" />
+    <ProjectReference Include="..\ThreePoint.IServices\ThreePoint.IServices.csproj" />
+    <ProjectReference Include="..\ThreePoint.IRepository\ThreePoint.IRepository.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+</Project>
