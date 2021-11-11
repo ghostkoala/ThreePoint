@@ -7,6 +7,8 @@ ThreePoint.IRepository/bin/
 ThreePoint.IRepository/obj/
 ThreePoint.IServices/bin/
 ThreePoint.IServices/obj/
+ThreePoint.Api/bin/
+ThreePoint.Api/obj/
 *.pdb
 *.AssemblyInfo.cs
 *.CopyComplete

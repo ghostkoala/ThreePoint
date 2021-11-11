@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThreePoint.Web", "ThreePoint.Web\ThreePoint.Web.csproj", "{1DE60DF9-950C-492D-9B46-B003D67A3F81}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThreePoint.WebCore", "ThreePoint.WebCore\ThreePoint.WebCore.csproj", "{64114CF6-2042-4520-829F-B8FC05095216}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThreePoint.IServices", "ThreePoint.IServices\ThreePoint.IServices.csproj", "{7AC4E5B9-AF37-4186-B4AE-F49E13AF626C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThreePoint.Services", "ThreePoint.Services\ThreePoint.Services.csproj", "{D593848D-84BF-4496-9F07-D66A92B12D20}"
@@ -16,6 +14,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThreePoint.Repository", "ThreePoint.Repository\ThreePoint.Repository.csproj", "{CAAF4EE1-21C9-4058-A03C-E30EA75A9A64}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThreePoint.Core", "ThreePoint.Core\ThreePoint.Core.csproj", "{6F9DB784-2D95-4A1C-8F64-29C19B261138}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThreePoint.Api", "ThreePoint.Api\ThreePoint.Api.csproj", "{651C9E56-1F1D-4EFF-98E6-B69260B6DA7C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -111,6 +111,18 @@ Global
 		{6F9DB784-2D95-4A1C-8F64-29C19B261138}.Release|x64.Build.0 = Release|Any CPU
 		{6F9DB784-2D95-4A1C-8F64-29C19B261138}.Release|x86.ActiveCfg = Release|Any CPU
 		{6F9DB784-2D95-4A1C-8F64-29C19B261138}.Release|x86.Build.0 = Release|Any CPU
+		{651C9E56-1F1D-4EFF-98E6-B69260B6DA7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{651C9E56-1F1D-4EFF-98E6-B69260B6DA7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{651C9E56-1F1D-4EFF-98E6-B69260B6DA7C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{651C9E56-1F1D-4EFF-98E6-B69260B6DA7C}.Debug|x64.Build.0 = Debug|Any CPU
+		{651C9E56-1F1D-4EFF-98E6-B69260B6DA7C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{651C9E56-1F1D-4EFF-98E6-B69260B6DA7C}.Debug|x86.Build.0 = Debug|Any CPU
+		{651C9E56-1F1D-4EFF-98E6-B69260B6DA7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{651C9E56-1F1D-4EFF-98E6-B69260B6DA7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{651C9E56-1F1D-4EFF-98E6-B69260B6DA7C}.Release|x64.ActiveCfg = Release|Any CPU
+		{651C9E56-1F1D-4EFF-98E6-B69260B6DA7C}.Release|x64.Build.0 = Release|Any CPU
+		{651C9E56-1F1D-4EFF-98E6-B69260B6DA7C}.Release|x86.ActiveCfg = Release|Any CPU
+		{651C9E56-1F1D-4EFF-98E6-B69260B6DA7C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
