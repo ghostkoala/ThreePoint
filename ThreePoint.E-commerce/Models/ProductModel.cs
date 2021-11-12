@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace ThreePoint.E_commerce.Models
 {
     /// <summary>
@@ -16,8 +18,8 @@ namespace ThreePoint.E_commerce.Models
         /// 件
         /// </summary>
         /// <value></value>
-        [Display(Name = "件")]
-        public int pcs { get; set; }
+        [Display(Name = "件数")]
+        public int Pcs { get; set; }
 
         /// <summary>
         /// 采购价
@@ -32,6 +34,13 @@ namespace ThreePoint.E_commerce.Models
         /// <value></value>
         [Display(Name = "销售价")]
         public decimal SellingPrice { get; set; }
+
+        /// <summary>
+        /// 销售币种
+        /// </summary>
+        /// <value></value>
+        [Display(Name = "货币")]
+        public string SellingCurrency { get; set; }
 
         /// <summary>
         /// FBA费用
@@ -87,7 +96,20 @@ namespace ThreePoint.E_commerce.Models
         /// </summary>
         /// <value></value>
         [Display(Name = "退货和广告率")]
-        public float ReturnAdvertisementPoint { get; set; }
+        public float ReturnAdvertisementPoint { get; set; } = 0.3f;
+
+        /// <summary>
+        /// 产品尺寸
+        /// </summary>
+        /// <value></value>
+        public ProductSizeModel Size { get; set; }
+
+        /// <summary>
+        /// 采购信息
+        /// </summary>
+        /// <value></value>
+        [Display(Name = "描述")]
+        public string Description { get; set; }
     }
 
 }

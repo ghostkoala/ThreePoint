@@ -1,15 +1,103 @@
 @using ThreePoint.E_commerce.Models;
+@model ThreePoint.E_commerce.Models.ProductModel;
 @{
     ViewData["Title"] = "ProductCalculation";
 }
 
 <ol class="breadcrumb">
-    <li><a href="#">Home</a></li>
-    <li><a href="Product">Product</a></li>
+    <li><a href="../">Home</a><span>&nbsp;&nbsp;/&nbsp;&nbsp; </span></li>
+    <li><a href="/Product">Product</a><span>&nbsp;&nbsp;/&nbsp;&nbsp;</span></li>
     <li class="active">ProductCalculation</li>
 </ol>
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="" </div>
+@using (Html.BeginForm(FormMethod.Post, new
+{
+    @onsubmit = "return CheckValid()",
+    @class = "form-horizontal",
+    @style = "margin-left: 20px;",
+    name = "Calculation",
+    id = "Calculation"
+}))
+{
+    @Html.HiddenFor(m=>m.Id)
+
+    <div class="form-group form-inline">
+        @Html.LabelFor(m => m.Name,null,new {@class="control-label"})
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "名称" })
+        @Html.ValidationMessageFor(m => m.Name)
+        <span>&nbsp;&nbsp;</span>
+        @Html.LabelFor(m => m.SalesRegions,null,new {@class="control-label"})
+        @Html.DropDownListFor(m => m.SalesRegions,ViewBag.SalesRegions as IEnumerable<SelectListItem>,new {
+    @style="height:26px;"})
+    </div>
+    <div class="form-group form-inline">
+        @Html.LabelFor(m => m.PurchasePrice,null,new {@class="control-label"})
+        @Html.TextBoxFor(m => m.PurchasePrice, new { @class = "form-control", placeholder = "人民币" })
+        @Html.ValidationMessageFor(m => m.PurchasePrice)
+        <span>&nbsp;</span>
+        @Html.LabelFor(m => m.Pcs,null,new {@class="control-label"})
+        @Html.TextBoxFor(m => m.Pcs, new { @class = "form-control", placeholder = "采购价" })
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+    <div class="form-group form-inline">
+        @Html.LabelFor(m => m.SellingPrice,null,new {@class="control-label"})
+        @Html.TextBoxFor(m => m.SellingPrice, new { @class = "form-control", placeholder = "0" })
+        @Html.DropDownListFor(m => m.SellingCurrency,ViewBag.Currency as IEnumerable<SelectListItem>,new {
+    @style="height:26px;"})
+        @Html.ValidationMessageFor(m => m.SellingPrice)
+        <span>&nbsp;&nbsp;</span>
+        @Html.LabelFor(m => m.ExchangeRate,null,new {@class="control-label"})
+        @Html.TextBoxFor(m => m.ExchangeRate, new { @class = "form-control", placeholder = "转人民币汇率" })
+    </div>
+    <div class="form-group form-inline">
+        @Html.LabelFor(m => m.SalesCommission,null,new {@class="control-label"})
+        @Html.TextBoxFor(m => m.SalesCommission, new { @class = "form-control", placeholder = "0" })
+        <span>&nbsp;&nbsp;</span>
+        @Html.LabelFor(m => m.FBAshipping,null,new {@class="control-label"})
+        @Html.TextBoxFor(m => m.FBAshipping, new { @class = "form-control", placeholder = "0" })
+        <span>&nbsp;&nbsp;</span>
+        @Html.LabelFor(m => m.FBAshipping,null,new {@class="control-label"})
+        @Html.TextBoxFor(m => m.FBAshipping, new { @class = "form-control disable", placeholder = "0" })
+    </div>
+    <div class="form-group form-inline">
+        @Html.LabelFor(m => m.ReturnAdvertisementPoint,null,new {@class="control-label"})
+        <div class="input-group">
+            @Html.TextBoxFor(m => m.ReturnAdvertisementPoint, new { @class = "form-control", placeholder =
+        "0",@style="width:52px;"})
+            @Html.ValidationMessageFor(m => m.ReturnAdvertisementPoint)
+            <div class="input-group-addon">%</div>
         </div>
+    </div>
+    <div class="form-group form-inline">
+        @Html.LabelFor(m => m.Pcs,null,new {@class="control-label"})
+        @Html.TextBoxFor(m => m.Pcs, new { @class = "form-control", placeholder = "名称" })
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+    <div class="form-group form-inline">
+        @Html.LabelFor(m => m.Pcs,null,new {@class="control-label"})
+        @Html.TextBoxFor(m => m.Pcs, new { @class = "form-control", placeholder = "名称" })
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+    <div class="form-group form-inline">
+        @Html.LabelFor(m => m.Pcs,null,new {@class="control-label"})
+        @Html.TextBoxFor(m => m.Pcs, new { @class = "form-control", placeholder = "名称" })
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+    <div class="form-group form-inline">
+        @Html.LabelFor(m => m.Pcs,null,new {@class="control-label"})
+        @Html.TextBoxFor(m => m.Pcs, new { @class = "form-control", placeholder = "名称" })
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+    <div class="form-group form-inline">
+        @Html.LabelFor(m => m.Pcs,null,new {@class="control-label"})
+        @Html.TextBoxFor(m => m.Pcs, new { @class = "form-control", placeholder = "名称" })
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+    <div class="form-group form-inline">
+        @Html.LabelFor(m => m.Pcs,null,new {@class="control-label"})
+        @Html.TextBoxFor(m => m.Pcs, new { @class = "form-control", placeholder = "名称" })
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+}
+
+<script></script>

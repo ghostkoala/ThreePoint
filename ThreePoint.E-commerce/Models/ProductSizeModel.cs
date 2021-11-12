@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace ThreePoint.E_commerce.Models
 {
     /// <summary>
