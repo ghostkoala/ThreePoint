@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThreePoint.Core", "ThreePoi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThreePoint.Api", "ThreePoint.Api\ThreePoint.Api.csproj", "{651C9E56-1F1D-4EFF-98E6-B69260B6DA7C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThreePoint.E-commerce", "ThreePoint.E-commerce\ThreePoint.E-commerce.csproj", "{FD1C1E1A-1FBF-4555-8111-0455A2DC72B8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -123,6 +125,18 @@ Global
 		{651C9E56-1F1D-4EFF-98E6-B69260B6DA7C}.Release|x64.Build.0 = Release|Any CPU
 		{651C9E56-1F1D-4EFF-98E6-B69260B6DA7C}.Release|x86.ActiveCfg = Release|Any CPU
 		{651C9E56-1F1D-4EFF-98E6-B69260B6DA7C}.Release|x86.Build.0 = Release|Any CPU
+		{FD1C1E1A-1FBF-4555-8111-0455A2DC72B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD1C1E1A-1FBF-4555-8111-0455A2DC72B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD1C1E1A-1FBF-4555-8111-0455A2DC72B8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FD1C1E1A-1FBF-4555-8111-0455A2DC72B8}.Debug|x64.Build.0 = Debug|Any CPU
+		{FD1C1E1A-1FBF-4555-8111-0455A2DC72B8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FD1C1E1A-1FBF-4555-8111-0455A2DC72B8}.Debug|x86.Build.0 = Debug|Any CPU
+		{FD1C1E1A-1FBF-4555-8111-0455A2DC72B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD1C1E1A-1FBF-4555-8111-0455A2DC72B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD1C1E1A-1FBF-4555-8111-0455A2DC72B8}.Release|x64.ActiveCfg = Release|Any CPU
+		{FD1C1E1A-1FBF-4555-8111-0455A2DC72B8}.Release|x64.Build.0 = Release|Any CPU
+		{FD1C1E1A-1FBF-4555-8111-0455A2DC72B8}.Release|x86.ActiveCfg = Release|Any CPU
+		{FD1C1E1A-1FBF-4555-8111-0455A2DC72B8}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
