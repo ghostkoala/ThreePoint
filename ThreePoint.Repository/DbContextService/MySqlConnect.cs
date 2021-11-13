@@ -11,14 +11,14 @@ namespace ThreePoint.Repository.DbContextService
         /// <summary>
         /// 主数据库连接
         /// </summary>
-        private static string WriteConnectString = "server=localhost;port=3306;database=cc;uid=root;pwd=root;CharSet=utf8;sslMode=None";
+        private static string WriteConnectString = "server=localhost;port=3306;database=cc;uid=root;pwd=Mysql888;CharSet=utf8;sslMode=None";
 
         /// <summary>
         /// 从数据库连接
         /// </summary>
         private static List<string> ReadConnectStrings = new List<string>()
         {
-            "server=localhost;port=3306;database=cc;uid=root;pwd=root;CharSet=utf8;sslMode=None"
+            "server=localhost;port=3306;database=cc;uid=root;pwd=Mysql888;CharSet=utf8;sslMode=None"
         };
 
         public static string GetReadConnectString()

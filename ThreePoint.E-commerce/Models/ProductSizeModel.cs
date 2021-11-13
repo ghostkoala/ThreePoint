@@ -11,28 +11,28 @@ namespace ThreePoint.E_commerce.Models
         /// 长度
         /// </summary>
         /// <value></value>
-        [Display(Name = "长度")]
+        [Display(Name = "长度：")]
         public float Long { get; set; }
 
         /// <summary>
         /// 宽度
         /// </summary>
         /// <value></value>
-        [Display(Name = "宽度")]
+        [Display(Name = "宽度：")]
         public float Width { get; set; }
 
         /// <summary>
         /// 高度
         /// </summary>
         /// <value></value>
-        [Display(Name = "高度")]
-        public float Hight { get; set; }
+        [Display(Name = "高度：")]
+        public float Height { get; set; }
 
         /// <summary>
         /// 重量
         /// </summary>
         /// <value></value>
-        [Display(Name = "重量")]
+        [Display(Name = "重量：")]
         public float Weight { get; set; }
     }
 }

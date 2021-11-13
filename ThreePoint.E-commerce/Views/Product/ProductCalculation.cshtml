@@ -4,11 +4,35 @@
     ViewData["Title"] = "ProductCalculation";
 }
 
-<ol class="breadcrumb">
-    <li><a href="../">Home</a><span>&nbsp;&nbsp;/&nbsp;&nbsp; </span></li>
-    <li><a href="/Product">Product</a><span>&nbsp;&nbsp;/&nbsp;&nbsp;</span></li>
+<ol class="breadcrumb" style="background-color: #ffffff;">
+    <li><a href="../">Home</a></li>
+    <li><a href="/Product">Product</a></li>
     <li class="active">ProductCalculation</li>
 </ol>
+
+<div class="form-horizontal" style="margin-left: 20px;">
+    <div class="form-group form-inline">
+        <label for="profit" class="control-label" style="background-color: red;">利润：</label>
+        <div class="input-group">
+            <input type="text" name="profit" id="profit" class="form-control" style="width: 75px;" placeholder="0" />
+            <div class="input-group-addon">￥</div>
+        </div>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <label for="totalprofit " class="control-label" style="background-color: red;">总利润：</label>
+        <div class="input-group">
+            <input type="text" name="profit" id="totalprofit" class="form-control" style="width: 92px;" placeholder="0" />
+            <div class="input-group-addon">￥</div>
+        </div>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <label for="profitrate" class="control-label" style="background-color: red;">利润率：</label>
+        <div class="input-group">
+            <input type="text" name="profitrate" id="profitrate" class="form-control" style="width:52px;" placeholder="0" />
+            <div class="input-group-addon">%</div>
+        </div>        
+    </div>
+</div>
+
+<hr />
 
 @using (Html.BeginForm(FormMethod.Post, new
 {
@@ -28,22 +52,55 @@
         <span>&nbsp;&nbsp;</span>
         @Html.LabelFor(m => m.SalesRegions,null,new {@class="control-label"})
         @Html.DropDownListFor(m => m.SalesRegions,ViewBag.SalesRegions as IEnumerable<SelectListItem>,new {
-    @style="height:26px;"})
+    @class="form-control"})
+    </div>
+    <div class="form-group form-inline">
+        @Html.LabelFor(m => m.Size.Long,null,new {@class="control-label"})
+        <div class="input-group">
+            @Html.TextBoxFor(m => m.Size.Long, new { @class = "form-control", placeholder = "0", @style = "width: 65px;" })
+            <div class="input-group-addon">cm</div>
+        </div>
+        @Html.ValidationMessageFor(m => m.Size.Long)
+        <span>&nbsp;&nbsp;</span>
+        @Html.LabelFor(m => m.Size.Width,null,new {@class="control-label"})
+        <div class="input-group">
+            @Html.TextBoxFor(m => m.Size.Width, new { @class = "form-control", placeholder = "0", @style = "width: 65px;" })
+            <div class="input-group-addon">cm</div>
+        </div>
+        @Html.ValidationMessageFor(m => m.Size.Width)
+        <span>&nbsp;&nbsp;</span>
+        @Html.LabelFor(m => m.Size.Height,null,new {@class="control-label"})
+        <div class="input-group">
+            @Html.TextBoxFor(m => m.Size.Height, new { @class = "form-control", placeholder = "0", @style = "width: 65px;" })
+            <div class="input-group-addon">cm</div>
+        </div>
+        @Html.ValidationMessageFor(m => m.Size.Height)
+    </div>
+    <div class="form-group form-inline">
+        @Html.LabelFor(m => m.Size.Weight,null,new {@class="control-label"})
+        <div class="input-group">
+            @Html.TextBoxFor(m => m.Size.Weight, new { @class = "form-control", placeholder = "0" })
+            <div class="input-group-addon">g</div>
+        </div>
+        @Html.ValidationMessageFor(m => m.Size.Weight)
     </div>
     <div class="form-group form-inline">
         @Html.LabelFor(m => m.PurchasePrice,null,new {@class="control-label"})
-        @Html.TextBoxFor(m => m.PurchasePrice, new { @class = "form-control", placeholder = "人民币" })
+        <div class="input-group">
+            @Html.TextBoxFor(m => m.PurchasePrice, new { @class = "form-control", placeholder = "人民币" })
+            <div class="input-group-addon">￥</div>
+        </div>
         @Html.ValidationMessageFor(m => m.PurchasePrice)
         <span>&nbsp;</span>
         @Html.LabelFor(m => m.Pcs,null,new {@class="control-label"})
-        @Html.TextBoxFor(m => m.Pcs, new { @class = "form-control", placeholder = "采购价" })
+        @Html.TextBoxFor(m => m.Pcs, new { @class = "form-control", placeholder = "件数" })
         @Html.ValidationMessageFor(m => m.Name)
     </div>
     <div class="form-group form-inline">
         @Html.LabelFor(m => m.SellingPrice,null,new {@class="control-label"})
-        @Html.TextBoxFor(m => m.SellingPrice, new { @class = "form-control", placeholder = "0" })
-        @Html.DropDownListFor(m => m.SellingCurrency,ViewBag.Currency as IEnumerable<SelectListItem>,new {
-    @style="height:26px;"})
+        @Html.TextBoxFor(m => m.SellingPrice, new { @class="form-control", placeholder="0" })
+        @Html.DropDownListFor(m => m.SellingCurrency,ViewBag.Currency as IEnumerable<SelectListItem>, new {
+    @class="form-control"})
         @Html.ValidationMessageFor(m => m.SellingPrice)
         <span>&nbsp;&nbsp;</span>
         @Html.LabelFor(m => m.ExchangeRate,null,new {@class="control-label"})
@@ -55,49 +112,29 @@
         <span>&nbsp;&nbsp;</span>
         @Html.LabelFor(m => m.FBAshipping,null,new {@class="control-label"})
         @Html.TextBoxFor(m => m.FBAshipping, new { @class = "form-control", placeholder = "0" })
-        <span>&nbsp;&nbsp;</span>
-        @Html.LabelFor(m => m.FBAshipping,null,new {@class="control-label"})
-        @Html.TextBoxFor(m => m.FBAshipping, new { @class = "form-control disable", placeholder = "0" })
     </div>
     <div class="form-group form-inline">
         @Html.LabelFor(m => m.ReturnAdvertisementPoint,null,new {@class="control-label"})
         <div class="input-group">
             @Html.TextBoxFor(m => m.ReturnAdvertisementPoint, new { @class = "form-control", placeholder =
-        "0",@style="width:52px;"})
+        "30",@style="width:52px;"})
             @Html.ValidationMessageFor(m => m.ReturnAdvertisementPoint)
             <div class="input-group-addon">%</div>
         </div>
     </div>
     <div class="form-group form-inline">
-        @Html.LabelFor(m => m.Pcs,null,new {@class="control-label"})
-        @Html.TextBoxFor(m => m.Pcs, new { @class = "form-control", placeholder = "名称" })
-        @Html.ValidationMessageFor(m => m.Name)
-    </div>
-    <div class="form-group form-inline">
-        @Html.LabelFor(m => m.Pcs,null,new {@class="control-label"})
-        @Html.TextBoxFor(m => m.Pcs, new { @class = "form-control", placeholder = "名称" })
-        @Html.ValidationMessageFor(m => m.Name)
-    </div>
-    <div class="form-group form-inline">
-        @Html.LabelFor(m => m.Pcs,null,new {@class="control-label"})
-        @Html.TextBoxFor(m => m.Pcs, new { @class = "form-control", placeholder = "名称" })
-        @Html.ValidationMessageFor(m => m.Name)
-    </div>
-    <div class="form-group form-inline">
-        @Html.LabelFor(m => m.Pcs,null,new {@class="control-label"})
-        @Html.TextBoxFor(m => m.Pcs, new { @class = "form-control", placeholder = "名称" })
-        @Html.ValidationMessageFor(m => m.Name)
-    </div>
-    <div class="form-group form-inline">
-        @Html.LabelFor(m => m.Pcs,null,new {@class="control-label"})
-        @Html.TextBoxFor(m => m.Pcs, new { @class = "form-control", placeholder = "名称" })
-        @Html.ValidationMessageFor(m => m.Name)
-    </div>
-    <div class="form-group form-inline">
-        @Html.LabelFor(m => m.Pcs,null,new {@class="control-label"})
-        @Html.TextBoxFor(m => m.Pcs, new { @class = "form-control", placeholder = "名称" })
-        @Html.ValidationMessageFor(m => m.Name)
+        @Html.LabelFor(m => m.Description,null,new {@class="control-label"})
+        @Html.TextAreaFor(m => m.Description, new { @class = "form-control", placeholder = "描述" })
+        @Html.ValidationMessageFor(m => m.Description)
     </div>
 }
+
+<div class="alert alert-info alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+    <strong>计算公式：</strong> 
+    <p>利润 = 售价 *（1-退货和广告费用率） * 汇率 - 佣金 - FBA运费 - 头程运费</p>
+    <p>利润率 = 利润 / 售价 * 汇率</p>
+</div>
 
 <script></script>

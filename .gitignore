@@ -20,6 +20,8 @@ ThreePoint.Web/bin/
 ThreePoint.Web/obj/
 ThreePoint.WebCore/obj/
 ThreePoint.WebCore/bin/
+ThreePoint.E-commerce/obj/
+ThreePoint.E-commerce/bin/
 *.g.cs
 *.AssemblyAttributes.cs
 *.pdb
@@ -49,5 +51,4 @@ ThreePoint.WebCore/bin/
 *.deps.json
 ThreePoint.Web/obj/
 ThreePoint.Web/bin/
-
-.vs/Logicore/DesignTimeBuild/.dtbcache.v2
+.vs/
