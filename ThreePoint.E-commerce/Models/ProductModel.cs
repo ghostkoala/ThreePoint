@@ -50,10 +50,10 @@ namespace ThreePoint.E_commerce.Models
         public decimal FBAshipping { get; set; }
 
         /// <summary>
-        /// 货运价格
+        /// 头程运费
         /// </summary>
         /// <value></value>
-        [Display(Name = "货运价格：")]
+        [Display(Name = "头程运费:")]
         public decimal FreightCost { get; set; }
 
         /// <summary>

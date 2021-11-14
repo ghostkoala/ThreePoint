@@ -18,14 +18,14 @@ namespace ThreePoint.E_commerce.Models
         /// 创建时间
         /// </summary>
         /// <value></value>
-        [Display(Name = "创建时间")]
+        [Display(Name = "创建时间：")]
         public string CreateTime { get; set; }
 
         /// <summary>
         /// 移除时间
         /// </summary>
         /// <value></value>
-        [Display(Name = "移除时间")]
+        [Display(Name = "移除时间：")]
         public string ReMoveTime { get; set; }
     }
 }

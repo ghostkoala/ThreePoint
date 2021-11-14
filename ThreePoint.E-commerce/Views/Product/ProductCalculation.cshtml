@@ -2,6 +2,10 @@
 @model ThreePoint.E_commerce.Models.ProductModel;
 @{
     ViewData["Title"] = "ProductCalculation";
+    var onkeypress = @"return event.keyCode>=48&&event.keyCode<=57||event.keyCode==46";
+    var onpaste = @"return !clipboardData.getData('text').match(/\D/)";
+    var ondragenter = @"return false";
+    var style = @"ime-mode:Disabled";
 }
 
 <ol class="breadcrumb" style="background-color: #ffffff;">
@@ -14,19 +18,19 @@
     <div class="form-group form-inline">
         <label for="profit" class="control-label" style="background-color: red;">利润：</label>
         <div class="input-group">
-            <input type="text" name="profit" id="profit" class="form-control" style="width: 75px;" placeholder="0" />
+            <input type="text" name="profit" id="profit" class="form-control" style="width: 75px;" placeholder="0" disabled/>
             <div class="input-group-addon">￥</div>
         </div>
         <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
         <label for="totalprofit " class="control-label" style="background-color: red;">总利润：</label>
         <div class="input-group">
-            <input type="text" name="profit" id="totalprofit" class="form-control" style="width: 92px;" placeholder="0" />
+            <input type="text" name="totalprofit" id="totalprofit" class="form-control" style="width: 92px;" placeholder="0" disabled/>
             <div class="input-group-addon">￥</div>
         </div>
         <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
         <label for="profitrate" class="control-label" style="background-color: red;">利润率：</label>
         <div class="input-group">
-            <input type="text" name="profitrate" id="profitrate" class="form-control" style="width:52px;" placeholder="0" />
+            <input type="text" name="profitrate" id="profitrate" class="form-control" style="width:52px;" placeholder="0" disabled/>
             <div class="input-group-addon">%</div>
         </div>        
     </div>
@@ -79,10 +83,17 @@
     <div class="form-group form-inline">
         @Html.LabelFor(m => m.Size.Weight,null,new {@class="control-label"})
         <div class="input-group">
-            @Html.TextBoxFor(m => m.Size.Weight, new { @class = "form-control", placeholder = "0" })
+            @Html.TextBoxFor(m => m.Size.Weight, new { @class = "form-control", placeholder = "0", @style = "width: 76px;" })
             <div class="input-group-addon">g</div>
         </div>
-        @Html.ValidationMessageFor(m => m.Size.Weight)
+        <span>&nbsp;&nbsp;</span>
+        @Html.ValidationMessageFor(m => m.FreightCost)
+        @Html.LabelFor(m => m.FreightCost,null,new {@class="control-label"})
+        <div class="input-group">
+            @Html.TextBoxFor(m => m.FreightCost, new { @class = "form-control", placeholder = "0", @style = "width: 76px;" })
+            <div class="input-group-addon">￥</div>
+        </div>
+        @Html.ValidationMessageFor(m => m.FreightCost)
     </div>
     <div class="form-group form-inline">
         @Html.LabelFor(m => m.PurchasePrice,null,new {@class="control-label"})
@@ -104,20 +115,28 @@
         @Html.ValidationMessageFor(m => m.SellingPrice)
         <span>&nbsp;&nbsp;</span>
         @Html.LabelFor(m => m.ExchangeRate,null,new {@class="control-label"})
-        @Html.TextBoxFor(m => m.ExchangeRate, new { @class = "form-control", placeholder = "转人民币汇率" })
+         <div class="input-group">
+             @Html.TextBoxFor(m => m.ExchangeRate, new { @class = "form-control", placeholder = "转人民币汇率" })
+             <div id="sc1" class="input-group-addon">￥</div>
+         </div>        
     </div>
     <div class="form-group form-inline">
         @Html.LabelFor(m => m.SalesCommission,null,new {@class="control-label"})
-        @Html.TextBoxFor(m => m.SalesCommission, new { @class = "form-control", placeholder = "0" })
+        <div class="input-group">
+            @Html.TextBoxFor(m => m.SalesCommission, new { @class = "form-control", placeholder = "0" })
+            <div id="sc1" class="input-group-addon">@ViewBag.Currency[0].Text</div>
+        </div>        
         <span>&nbsp;&nbsp;</span>
         @Html.LabelFor(m => m.FBAshipping,null,new {@class="control-label"})
-        @Html.TextBoxFor(m => m.FBAshipping, new { @class = "form-control", placeholder = "0" })
+        <div class="input-group">
+            @Html.TextBoxFor(m => m.FBAshipping, new { @class = "form-control", placeholder = "0" })
+            <div id="sc2" class="input-group-addon">@ViewBag.Currency[0].Text</div>
+        </div>
     </div>
     <div class="form-group form-inline">
         @Html.LabelFor(m => m.ReturnAdvertisementPoint,null,new {@class="control-label"})
         <div class="input-group">
-            @Html.TextBoxFor(m => m.ReturnAdvertisementPoint, new { @class = "form-control", placeholder =
-        "30",@style="width:52px;"})
+            @Html.TextBoxFor(m => m.ReturnAdvertisementPoint, new {@class = "form-control", placeholder="30", @style="width:52px;"})
             @Html.ValidationMessageFor(m => m.ReturnAdvertisementPoint)
             <div class="input-group-addon">%</div>
         </div>
@@ -127,14 +146,21 @@
         @Html.TextAreaFor(m => m.Description, new { @class = "form-control", placeholder = "描述" })
         @Html.ValidationMessageFor(m => m.Description)
     </div>
+    <div class="form-group form-inline">
+        <button type="button" class="form-control" onclick="calcu()">计算</button>
+        <span>&nbsp;&nbsp;</span>
+        <input id="submit" type="submit" class="form-control" value="提交" />
+        <span>&nbsp;&nbsp;</span>
+        <input id="submit" type="reset" class="form-control" value="清空" />
+    </div>
 }
 
 <div class="alert alert-info alert-dismissible" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
             aria-hidden="true">&times;</span></button>
     <strong>计算公式：</strong> 
-    <p>利润 = 售价 *（1-退货和广告费用率） * 汇率 - 佣金 - FBA运费 - 头程运费</p>
+    <p>利润 = （售价 *（1-退货和广告费用率）- 佣金 - FBA运费） * 汇率 - 采购价 - 头程运费</p>
     <p>利润率 = 利润 / 售价 * 汇率</p>
 </div>
 
-<script></script>
+<script src="~/js/product/Calculation.js" asp-append-version=true></script>
