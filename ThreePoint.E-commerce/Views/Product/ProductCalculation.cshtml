@@ -57,6 +57,12 @@
         @Html.LabelFor(m => m.SalesRegions,null,new {@class="control-label"})
         @Html.DropDownListFor(m => m.SalesRegions,ViewBag.SalesRegions as IEnumerable<SelectListItem>,new {
     @class="form-control"})
+        <span>&nbsp;&nbsp;</span>
+        <label class=" control-label">运输方式：</label>
+        <select class="form-control" id="transport">
+            <option value="1" selected>空派</option>
+            <option value="2">海运</option>
+        </select>
     </div>
     <div class="form-group form-inline">
         @Html.LabelFor(m => m.Size.Long,null,new {@class="control-label"})
@@ -124,13 +130,13 @@
         @Html.LabelFor(m => m.SalesCommission,null,new {@class="control-label"})
         <div class="input-group">
             @Html.TextBoxFor(m => m.SalesCommission, new { @class = "form-control", placeholder = "0" })
-            <div id="sc1" class="input-group-addon">@ViewBag.Currency[0].Text</div>
+            <div id="sc2" class="input-group-addon">@ViewBag.Currency[0].Text</div>
         </div>        
         <span>&nbsp;&nbsp;</span>
         @Html.LabelFor(m => m.FBAshipping,null,new {@class="control-label"})
         <div class="input-group">
             @Html.TextBoxFor(m => m.FBAshipping, new { @class = "form-control", placeholder = "0" })
-            <div id="sc2" class="input-group-addon">@ViewBag.Currency[0].Text</div>
+            <div id="sc3" class="input-group-addon">@ViewBag.Currency[0].Text</div>
         </div>
     </div>
     <div class="form-group form-inline">

@@ -1,3 +1,12 @@
+//加载上次数据
+if (typeof (Storage) !== "undefined") {
+    $("#ExchangeRate").val(localStorage.getItem("ExchangeRate"));
+    $("#ReturnAdvertisementPoint").val(localStorage.getItem("ReturnAdvertisementPoint"));
+
+} else {
+    alert("你的浏览器不支持本地存储数据");
+}
+
 // 利润计算按钮事件
 function calcu() {
     var PurchasePrice = $("#PurchasePrice");
@@ -57,10 +66,13 @@ function calcu() {
     $("#profit").val(Profit.toFixed(2));
     $("#totalprofit").val(totalProfit.toFixed(2));
     $("#profitrate").val(Profitrate);
+
+    localStorage.setItem("ExchangeRate", ExchangeRate.val());
+    localStorage.setItem("ReturnAdvertisementPoint", ReturnAdvertisementPoint.val());
 }
 
 // 自动计算佣金
-$("#SellingPrice").change(function () {
+$("#SellingPrice").keyup(function () {
     var p = $("#SellingPrice").val() * 0.15;
     $("#SalesCommission").val(p.toFixed(2));
 });
@@ -68,9 +80,9 @@ $("#SellingPrice").change(function () {
 // 选择货币事件
 $("#SellingCurrency").change(function () {
     var s = $(this).find("option:selected").text();
-    console.log(s);
     $("#sc1").text(s);
     $("#sc2").text(s);
+    $("#sc3").text(s);
 });
 
 // 广告+退货金额事件
@@ -91,10 +103,42 @@ $("#SellingPrice").keyup(function () {
     s = $("#ReturnAdvertisementPoint").val();
     if (s > 0) {
         p = s * $(this).val() / 100;
-        $("#returnAdvLabel").text(p);
+        $("#returnAdvLabel").text(p.toFixed(2));
     }
     else {
         $("#returnAdvLabel").text("");
     }
     return true;
 });
+
+// 重量事件
+$("#Size_Weight").keyup(function () {
+    var p = $("#Size_Weight").val();
+    var t = $("#transport").val();
+
+    // 国内运费计算
+    if (t == 1) {
+        $("#FreightCost").val(90 / 5000 * p);
+    }
+    else {
+        $("#FreightCost").val(20 / 6000 * p);
+    }
+
+    // FBA计算
+    if (p <= 170) {
+        s = 2.7;
+    }
+    else if (p > 170 && p <= 340) {
+        s = 2.84;
+    }
+    else if (p > 340 && p <= 453) {
+        s = 3.32;
+    }
+    else {
+        s = 0;
+    }
+    $("#FBAshipping").val(s.toFixed(2));
+});
+
+
+
